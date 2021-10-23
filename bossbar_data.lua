@@ -187,7 +187,7 @@ HPBars.BossIgnoreList = {
 
 HPBars.BarColorings = {
 	vanillaDefault = Color(0.9, 0.9, 0.9, 1, 0, -1, -1), -- red tint
-	vanillaHit = Color(0, 0, 0, 1, 0, 0, 0), -- black coloring
+	vanillaHit = Color(0.1, 0.1, 0.1, 1, 0, 0, 0), -- black coloring
 	vanillaHeal = Color(1, 0.54, 0, 1, 0, 0, 0), -- orange coloring
 	vanillaInvincible = Color(1, 1, 1, 0.5, 0.25, 0.25, 0.25), -- gray coloring
 	white = Color(1, 1, 1, 1, 1, 1, 1), -- full white coloring
