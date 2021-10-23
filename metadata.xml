@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-    <name>'enhanced boss bars</name>
+    <name>'Enhanced Boss Bars</name>
     <directory>enhanced boss bars</directory>
     <id>2635267643</id>
     <description>A mod that reimagines boss health bars to be more unique, customizeable and responsive.
@@ -28,7 +28,7 @@ Alternatively you can edit the config.lua file found in the mod files.
  [*] [b]TheSavageHybrid[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2515917831]Paper Healthbars[/url]&quot; design
  [*] [b]hippocrunchy[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2530772508]Alt Horsemen (+War)[/url]&quot; mod as an example
 [/list]</description>
-    <version>1.4</version>
+    <version>1.5</version>
     <visibility>Public</visibility>
     <tag id="Lua"/>
     <tag id="Bosses"/>

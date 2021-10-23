@@ -1,7 +1,7 @@
 -- MOD CONFIG MENU Compatibility
 local MCMLoaded, MCM = pcall(require, "scripts.modconfig")
 HPBars.MCMLoaded = MCMLoaded
-if MCMLoaded or MCM then
+if MCMLoaded then
 	function AnIndexOf(t, val)
 		for k, v in ipairs(t) do
 			if v == val then
