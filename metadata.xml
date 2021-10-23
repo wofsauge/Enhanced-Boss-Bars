@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+    <name>'enhanced boss bars</name>
+    <directory>enhanced boss bars</directory>
+    <id>2635267643</id>
+    <description>A mod that reimagines boss health bars to be more unique, customizeable and responsive.
+
+[h2]Features[/h2]
+[list]
+ [*] Unique icons for every boss
+ [*] Over 30 special bar designs
+ [*] One bar for each individual boss and boss segement
+ [*] Fully customizable
+ [*] Full modding support
+[/list]
+
+[h2]Configuration[/h2]
+You can use '[url=]Mod config Menu[/url]' to customize this mod!
+Alternatively you can edit the config.lua file found in the mod files.
+
+[h2]Special Thanks[/h2]
+[list]
+ [*] [b]Sillst[/b] for the awesome mod thumbnail
+ [*] [b]minichibis[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=1674940041]Agnry Faic Boss Bar[/url]&quot; icons
+ [*] [b]Spyro[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=839983526]Better Boss Bar[/url]&quot; design
+ [*] [b]Hatterene[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=834198360]Better boss Bar[/url]&quot; design
+ [*] [b]serious max[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=1431781210]Boss Health bar background[/url]&quot; design
+ [*] [b]TheSavageHybrid[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2515917831]Paper Healthbars[/url]&quot; design
+ [*] [b]hippocrunchy[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2530772508]Alt Horsemen (+War)[/url]&quot; mod as an example
+[/list]</description>
+    <version>1.4</version>
+    <visibility>Public</visibility>
+    <tag id="Lua"/>
+    <tag id="Bosses"/>
+    <tag id="Tweaks"/>
+    <tag id="Graphics"/>
+</metadata>
