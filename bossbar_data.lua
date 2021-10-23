@@ -138,6 +138,9 @@ HPBars.BossIgnoreList = {
 	["412.0"] = function(entity) -- delirium spawned stuff
 		return entity.Parent ~= nil
 	end,
+	["866.0"] = function(entity) -- Dark Esau
+		return not HPBars.Config.ShowDarkEsau
+	end,
 	["903.1"] = function(entity) -- The Mask
 		return string.find(entity:GetSprite():GetAnimation(), "Stun")
 	end,
@@ -160,7 +163,19 @@ HPBars.BossIgnoreList = {
 		return string.find(entity:GetSprite():GetAnimation(), "Destroyed")
 	end,
 	["951.0"] = function(entity) -- Beast when not active
-		return entity:GetSprite():GetAnimation() == "Idle" and entity:ToNPC().State == 16
+		return entity:GetSprite():GetAnimation() == "Idle" and entity:ToNPC().State == 16 or not HPBars.Config.ShowInBeastFight
+	end,
+	["951.10"] = function(entity) -- Ultra Famine
+		return not HPBars.Config.ShowInBeastFight
+	end,
+	["951.20"] = function(entity) -- Ultra pestilence
+		return not HPBars.Config.ShowInBeastFight
+	end,
+	["951.30"] = function(entity) -- Ultra War
+		return not HPBars.Config.ShowInBeastFight
+	end,
+	["951.40"] = function(entity) -- Ultra Death
+		return not HPBars.Config.ShowInBeastFight
 	end,
 	["951.100"] = true, -- Beast bg entity
 	["951.101"] = true, -- Beast bg entity
@@ -181,7 +196,7 @@ HPBars.BarColorings = {
 HPBars.ColoringFunctions = {
 	["Vanilla"] = function(bossEntry)
 		local curTime = game:GetFrameCount()
-		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 0 then
+		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 0 and HPBars.Config.EnableFlashing then
 			if bossEntry.hitState == "heal" then
 				bossEntry.barSprite.Color = bossEntry.barStyle.healColoring
 			elseif bossEntry.hitState == "damage" then
@@ -197,7 +212,7 @@ HPBars.ColoringFunctions = {
 	end,
 	["WhiteToRed"] = function(bossEntry)
 		local curTime = game:GetFrameCount()
-		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 0 then
+		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 0 and HPBars.Config.EnableFlashing then
 			if bossEntry.hitState == "heal" then
 				bossEntry.barSprite.Color = bossEntry.barStyle.healColoring
 			elseif bossEntry.hitState == "damage" then

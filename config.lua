@@ -13,10 +13,6 @@ HPBars.UserConfig = {
     -- Allows some bosses to use their special boss bar designs
     -- Default value: true
     ["EnableSpecificBossbars"] = true,
-    -- Allows some bosses to use their special boss bar designs
-    -- Possible Values: [None, Percent, HPLeft]
-    -- Default value: "None"
-    ["InfoText"] = "None",
     -- Defines how many bars should be displayed per row
     -- Default value: 7
     ["BarsPerRow"] = 7,
@@ -26,6 +22,25 @@ HPBars.UserConfig = {
     -- Defines the distance the bar and the edge of the screen
     -- Default value: 17
     ["ScreenPadding"] = 17,
+    -- Enables the flashing of the bars, when the enemy gets hit or heals itself
+    -- Default value: true
+    ["EnableFlashing"] = true,
+
+    ---------------------------------
+    --------- Boss Specific ---------
+    -- Shows the Hp bar for Dark Esau ghost
+    -- Default value: true
+    ["ShowDarkEsau"] = true,
+    -- Shows the Hp bar for Beast and its companions
+    -- Default value: true
+    ["ShowInBeastFight"] = true,
+
+    ---------------------------------
+    ----------- Info text -----------
+    -- Allows some bosses to use their special boss bar designs
+    -- Possible Values: [None, Percent, HPLeft]
+    -- Default value: "None"
+    ["InfoText"] = "None",
     -- Changes the transparency of the info text
     -- Possible Values between 0 and 1
     -- Default value: 1
@@ -55,9 +70,12 @@ HPBars.DefaultConfig = {
     ["Position"] = "Bottom",
     ["ShowIcons"] = true,
     ["EnableSpecificBossbars"] = true,
-    ["InfoText"] = "None",
     ["BarsPerRow"] = 7,    
     ["BarPadding"] = 15,
     ["ScreenPadding"] = 17,
+    ["EnableFlashing"] = true,
+    ["ShowDarkEsau"] = true,
+    ["ShowInBeastFight"] = true,
+    ["InfoText"] = "None",
     ["TextTransparency"] = 1,
 }

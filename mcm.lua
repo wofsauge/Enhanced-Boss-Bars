@@ -104,28 +104,6 @@ if MCMLoaded then
 			end,
 		}
 	)
-	-- Toggle icons
-	MCM.AddSetting(
-		mcmName,
-		"General",
-		{
-			Type = ModConfigMenu.OptionType.BOOLEAN,
-			CurrentSetting = function()
-				return HPBars.Config["EnableSpecificBossbars"]
-			end,
-			Display = function()
-				local onOff = "False"
-				if HPBars.Config["EnableSpecificBossbars"] then
-					onOff = "True"
-				end
-				return "Enable boss specific bars: " .. onOff
-			end,
-			OnChange = function(currentBool)
-				HPBars.Config["EnableSpecificBossbars"] = currentBool
-			end,
-			Info = {"Allows some bosses to use their special boss bar designs"}
-		}
-	)
 	-- Bar padding
 	MCM.AddSetting(
         mcmName,
@@ -186,6 +164,28 @@ if MCMLoaded then
 			Info = {"Number of bars per row displayed"}
 		}
 	)
+	-- Enable Flashing
+	MCM.AddSetting(
+		mcmName,
+		"General",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["EnableFlashing"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["EnableFlashing"] then
+					onOff = "True"
+				end
+				return "Enable Flashing: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["EnableFlashing"] = currentBool
+			end,
+			Info = {"Enables / disables flashing of the bar when hit or healed"}
+		}
+	)
 
 	-- Text Mode
 	local textModes = {"None", "Percent", "HPLeft"}
@@ -227,6 +227,75 @@ if MCMLoaded then
 				HPBars.Config["TextTransparency"] = currentNum / 10
 			end,
 			Info = {"Changes the transparency of the info text"}
+		}
+	)
+
+
+
+	-- Enable Dark Esau
+	MCM.AddSetting(
+		mcmName,
+		"Bosses",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowDarkEsau"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowDarkEsau"] then
+					onOff = "True"
+				end
+				return "Enable Dark Esau: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowDarkEsau"] = currentBool
+			end,
+			Info = {"Enables / disables the bar for Dark Esau"}
+		}
+	)
+	-- Enable Dark Esau
+	MCM.AddSetting(
+		mcmName,
+		"Bosses",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowInBeastFight"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowInBeastFight"] then
+					onOff = "True"
+				end
+				return "Enable in Beast fight: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowInBeastFight"] = currentBool
+			end,
+			Info = {"Enables / disables the bar for the Beast fight"}
+		}
+	)
+	-- Toggle boss designs
+	MCM.AddSetting(
+		mcmName,
+		"Bosses",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["EnableSpecificBossbars"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["EnableSpecificBossbars"] then
+					onOff = "True"
+				end
+				return "Enable boss specific bars: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["EnableSpecificBossbars"] = currentBool
+			end,
+			Info = {"Allows some bosses to use their special boss bar designs"}
 		}
 	)
 end
