@@ -739,6 +739,7 @@ HPBars.BossDefinitions = {
 		offset = Vector(-7, 0)
 	},
 	["413.0"] = {sprite = path .. "chapter4/the_matriarch.png", offset = Vector(-10, 0)},
+	["866.0"]  = {sprite = path .. "minibosses/dark_esau.png", offset = Vector(-6, 0)},
 	["900.0"] = {
 		sprite = path .. "chapter3/reap_creep.png",
 		conditionalSprites = {
