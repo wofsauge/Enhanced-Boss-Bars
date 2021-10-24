@@ -115,13 +115,13 @@ HPBars.BossIgnoreList = {
 		return entity:ToNPC().I1 == 1
 	end,
 	["274.0"] = function(entity) -- Mega satan before activation
-		return entity:ToNPC().State == 2
+		return entity:ToNPC().State == 2 or not HPBars.Config.ShowMegaSatan
 	end,
 	["274.1"] = function(entity) -- Mega satan before activation
-		return entity:ToNPC().State == 2
+		return entity:ToNPC().State == 2 or not HPBars.Config.ShowMegaSatan
 	end,
 	["274.2"] = function(entity) -- Mega satan before activation
-		return entity:ToNPC().State == 2
+		return entity:ToNPC().State == 2 or not HPBars.Config.ShowMegaSatan
 	end,
 	["266.1"] = true, -- mama gurdy hand
 	["266.2"] = true, -- mama gurdy hand
@@ -151,7 +151,7 @@ HPBars.BossIgnoreList = {
 	["906.1"] = true, -- hornfel decoy
 	["907.0"] = true, -- Gideon (will be handled by the game itself)
 	["912.0"] = function(entity) -- Mother Segments
-		return entity.Parent ~= nil or entity:GetSprite():GetAnimation() == "Transition"
+		return entity.Parent ~= nil or entity:GetSprite():GetAnimation() == "Transition" or not HPBars.Config.ShowInMotherFight
 	end,
 	["912.30"] = true, -- Mother snake attacks
 	["912.100"] = true, -- Mother ball attacks

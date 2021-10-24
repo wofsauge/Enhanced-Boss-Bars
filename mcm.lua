@@ -254,7 +254,7 @@ if MCMLoaded then
 			Info = {"Enables / disables the bar for Dark Esau"}
 		}
 	)
-	-- Enable Dark Esau
+	-- Enable Beast Fight
 	MCM.AddSetting(
 		mcmName,
 		"Bosses",
@@ -274,6 +274,50 @@ if MCMLoaded then
 				HPBars.Config["ShowInBeastFight"] = currentBool
 			end,
 			Info = {"Enables / disables the bar for the Beast fight"}
+		}
+	)
+	-- Enable Mother
+	MCM.AddSetting(
+		mcmName,
+		"Bosses",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowInMotherFight"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowInMotherFight"] then
+					onOff = "True"
+				end
+				return "Enable in Mother fight: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowInMotherFight"] = currentBool
+			end,
+			Info = {"Enables / disables the bar for the Mother fight"}
+		}
+	)
+	-- Enable Mega Satan
+	MCM.AddSetting(
+		mcmName,
+		"Bosses",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowMegaSatan"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowMegaSatan"] then
+					onOff = "True"
+				end
+				return "Enable Mega Satan: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowMegaSatan"] = currentBool
+			end,
+			Info = {"Enables / disables the bar for Mega Satan"}
 		}
 	)
 	-- Toggle boss designs

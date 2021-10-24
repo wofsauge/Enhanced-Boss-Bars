@@ -34,6 +34,12 @@ HPBars.UserConfig = {
     -- Shows the Hp bar for Beast and its companions
     -- Default value: true
     ["ShowInBeastFight"] = true,
+    -- Shows the Hp bar for Mother
+    -- Default value: true
+    ["ShowInMotherFight"] = true,
+    -- Shows the Hp bar for Mega Satan
+    -- Default value: true
+    ["ShowMegaSatan"] = true,
 
     ---------------------------------
     ----------- Info text -----------
@@ -76,6 +82,8 @@ HPBars.DefaultConfig = {
     ["EnableFlashing"] = true,
     ["ShowDarkEsau"] = true,
     ["ShowInBeastFight"] = true,
+    ["ShowInMotherFight"] = true,
+    ["ShowMegaSatan"] = true,
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
 }
