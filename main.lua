@@ -11,6 +11,7 @@ require("mcm")
 local game = Game()
 HPBars.currentBosses = {}
 local currentBossesSorted = {}
+local badload = false
 
 local enableDebug = false
 
@@ -371,7 +372,19 @@ function HPBars:renderIcon(bossEntry, barPos, hpbarFill)
 	end
 end
 
+function HPBars:handleBadLoad()
+	if badload then
+		Isaac.RenderText("Enhanced Boss Bars detected a conflicting mod or first installation!", 40,30, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("Please deactivate all other mods that alter the Boss bar sprites and", 40,40, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("Restart your game!", 40,50, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("(This tends to happen when the mod is first installed, a conflicting", 40,70, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("mod is enabled, or when the mod is re-enabled via the mod menu)", 40,80, 1, 0.5, 0.5, 1)
+	end
+end
+
+
 function HPBars:onRender()
+	HPBars:handleBadLoad()
 	HPBars:updateRoomEntities()
 	local currentBossCount = #currentBossesSorted
 	if currentBossCount <= 0 then
@@ -451,8 +464,25 @@ HPBars:AddCallback(ModCallbacks.MC_POST_RENDER, HPBars.onRender)
 --------------------------------
 --------Handle Savadata---------
 --------------------------------
+function HPBars:evaluateBadLoad()
+	local testSprite = Sprite()
+	testSprite:Load(HPBars.barPath .. "custom_bosshp.anm2", true)
+	testSprite:ReplaceSpritesheet(0, "gfx/ui/ui_bosshealthbar.png")
+	testSprite:LoadGraphics()
+	testSprite:Play("bg100")
+
+	for x = -10,10 do
+		local qcolor = testSprite:GetTexel(Vector(x,0),Vector.Zero,1,0)
+		if qcolor.Red ~= 1 or qcolor.Green ~= 1 or qcolor.Blue ~= 1 or qcolor.Alpha ~= 1 then
+			return true
+		end
+	end
+	return false
+end
+
 local json = require("json")
 function OnGameStart(_, isSave)
+	badload = HPBars:evaluateBadLoad()
 	HPBars.currentBosses = {}
 	currentBossesSorted = {}
 	--Loading Moddata--
