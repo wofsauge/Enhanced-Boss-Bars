@@ -151,7 +151,8 @@ HPBars.BossIgnoreList = {
 	["906.1"] = true, -- hornfel decoy
 	["907.0"] = true, -- Gideon (will be handled by the game itself)
 	["912.0"] = function(entity) -- Mother Segments
-		return entity.Parent ~= nil or entity:GetSprite():GetAnimation() == "Transition" or not HPBars.Config.ShowInMotherFight
+		return entity.Parent ~= nil or entity:GetSprite():GetAnimation() == "Transition" or
+			not HPBars.Config.ShowInMotherFight
 	end,
 	["912.30"] = true, -- Mother snake attacks
 	["912.100"] = true, -- Mother ball attacks
@@ -164,7 +165,8 @@ HPBars.BossIgnoreList = {
 		return string.find(entity:GetSprite():GetAnimation(), "Destroyed")
 	end,
 	["951.0"] = function(entity) -- Beast when not active
-		return entity:GetSprite():GetAnimation() == "Idle" and entity:ToNPC().State == 16 or not HPBars.Config.ShowInBeastFight
+		return entity:GetSprite():GetAnimation() == "Idle" and entity:ToNPC().State == 16 or
+			not HPBars.Config.ShowInBeastFight
 	end,
 	["951.10"] = function(entity) -- Ultra Famine
 		return not HPBars.Config.ShowInBeastFight
@@ -204,7 +206,7 @@ HPBars.ColoringFunctions = {
 				bossEntry.barSprite.Color = bossEntry.barStyle.hitColoring
 			end
 		else
-			if bossEntry.entity:IsEnemy() and (bossEntry.entity:IsInvincible() or not bossEntry.entity:IsVulnerableEnemy()) then
+			if HPBars:isInvincible(bossEntry) then
 				bossEntry.barSprite.Color = bossEntry.barStyle.invincibleColoring
 			else
 				bossEntry.barSprite.Color = bossEntry.barStyle.idleColoring
@@ -220,7 +222,7 @@ HPBars.ColoringFunctions = {
 				bossEntry.barSprite.Color = bossEntry.barStyle.hitColoring
 			end
 		else
-			if bossEntry.entity:IsEnemy() and (bossEntry.entity:IsInvincible() or not bossEntry.entity:IsVulnerableEnemy()) then
+			if HPBars:isInvincible(bossEntry) then
 				bossEntry.barSprite.Color = bossEntry.barStyle.invincibleColoring
 			else
 				local hpbarFill = math.ceil((bossEntry.hp / bossEntry.maxHP) * 100)
@@ -432,6 +434,7 @@ HPBars.BarStyles = {
 HPBars.BossDefinitions = {
 	--[[ Format: ["Type.Variant"] = { 
 		sprite = main sprite that this entity should use as its icon
+		ignoreInvincible = if set to true, this will make the boss bar to not show invincible state
 		iconAnm2 = Path to a .anm2 file this icon should use instead of the default one.
 		iconAnimationType = Possible values: ["HP","Animated"]
 				HP: 		DEFAULT. The given .anm2 file will render the animation frame based on the current boss HP in percent (0-99 Frames). This allows for custom animations based on the progress of damage you have dealt.
@@ -441,8 +444,7 @@ HPBars.BossDefinitions = {
 		barSyle = Specific bar-style the boss should use. Value can either be the Name of the entry from the HPBars.BarStyles table or a new table formated the same as an entry in the HPBars.BarStyles table
 	}
 	]] --
-	["UNDEFINED"] = {
-	},
+	["UNDEFINED"] = {},
 	["19.0"] = {
 		sprite = path .. "chapter1/larry jr.png",
 		conditionalSprites = {
@@ -732,14 +734,14 @@ HPBars.BossDefinitions = {
 	["408.0"] = {sprite = path .. "unused/skinless_hush.png", offset = Vector(-8, 0)},
 	["409.0"] = {sprite = path .. "chapter2/rag_mega.png", offset = Vector(-7, 0)},
 	["410.0"] = {sprite = path .. "chapter3/sisters_vis.png", offset = Vector(-5, 0)},
-	["411.0"] = {sprite = path .. "chapter2/big_horn.png", offset = Vector(-9, -2)},
+	["411.0"] = {sprite = path .. "chapter2/big_horn.png", ignoreInvincible = true, offset = Vector(-9, -2)},
 	["412.0"] = {
 		sprite = path .. "final/delirium.png",
 		barStyle = "Delirium",
 		offset = Vector(-7, 0)
 	},
 	["413.0"] = {sprite = path .. "chapter4/the_matriarch.png", offset = Vector(-10, 0)},
-	["866.0"]  = {sprite = path .. "minibosses/dark_esau.png", offset = Vector(-6, 0)},
+	["866.0"] = {sprite = path .. "minibosses/dark_esau.png", offset = Vector(-6, 0)},
 	["900.0"] = {
 		sprite = path .. "chapter3/reap_creep.png",
 		conditionalSprites = {

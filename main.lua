@@ -160,6 +160,7 @@ function HPBars:updateSprites(tableEntry)
 		end
 		tableEntry.iconOffset = bossDefinition.offset or tableEntry.iconOffset
 
+		tableEntry.ignoreInvincible = bossDefinition.ignoreInvincible
 		tableEntry.currentIcon = iconToLoad
 	end
 	tableEntry.iconSprite:Update()
@@ -197,6 +198,7 @@ function HPBars:createNewBossBar(entity)
 		iconSprite = icon,
 		iconOffset = Vector(-4, 0),
 		iconAnimationType = "HP",
+		ignoreInvincible = nil,
 		currentIcon = nil,
 		barSprite = bossHPsprite,
 		barStyle = barStyle,
@@ -213,6 +215,11 @@ end
 
 function HPBars:removeBarEntry(entity)
 	HPBars.currentBosses[GetPtrHash(entity)] = nil
+end
+
+function HPBars:isInvincible(bossEntry)
+	return not bossEntry.ignoreInvincible and bossEntry.entity:IsEnemy() and
+		(bossEntry.entity:IsInvincible() or not bossEntry.entity:IsVulnerableEnemy())
 end
 
 local lastUpdate = 0
