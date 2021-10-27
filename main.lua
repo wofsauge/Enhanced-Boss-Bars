@@ -338,7 +338,9 @@ function HPBars:isVerticalLayout()
 end
 
 function HPBars:getRowOffset()
-	return HPBars.Config.Position == "Left" and Vector(-20, 0) or HPBars.Config.Position == "Right" and Vector(20, 0) or HPBars.Config.Position == "top" and Vector(0, -20) or Vector(0,20)
+	return HPBars.Config.Position == "Left" and Vector(-20, 0) or HPBars.Config.Position == "Right" and Vector(20, 0) or
+		HPBars.Config.Position == "Top" and Vector(0, -20) or
+		Vector(0, 20)
 end
 
 function HPBars:renderInfoText(bossEntry, barPos, barSize)
