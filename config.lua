@@ -10,6 +10,9 @@ HPBars.UserConfig = {
     -- Toggle if icons should be shown at all
     -- Default value: true
     ["ShowIcons"] = true,
+    -- Toggle if boss specific icons should be shown. If this option is set to false, it will display the vanilla icon
+    -- Default value: true
+    ["ShowCustomIcons"] = true,
     -- Allows some bosses to use their special boss bar designs
     -- Default value: true
     ["EnableSpecificBossbars"] = true,
@@ -25,6 +28,9 @@ HPBars.UserConfig = {
     -- Enables the flashing of the bars, when the enemy gets hit or heals itself
     -- Default value: true
     ["EnableFlashing"] = true,
+    -- If the boss is a champion and this is enabled, the icon will be colored the same way as the boss 
+    -- Default value: true
+    ["UseChampionColors"] = true,
 
     ---------------------------------
     --------- Boss Specific ---------
@@ -75,15 +81,19 @@ HPBars.DefaultConfig = {
     ["BarStyle"] = "Default",
     ["Position"] = "Bottom",
     ["ShowIcons"] = true,
+    ["ShowCustomIcons"] = true,
     ["EnableSpecificBossbars"] = true,
     ["BarsPerRow"] = 7,    
     ["BarPadding"] = 15,
     ["ScreenPadding"] = 17,
     ["EnableFlashing"] = true,
+    ["UseChampionColors"] = true,
+
     ["ShowDarkEsau"] = true,
     ["ShowInBeastFight"] = true,
     ["ShowInMotherFight"] = true,
     ["ShowMegaSatan"] = true,
+    
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
 }

@@ -104,6 +104,28 @@ if MCMLoaded then
 			end,
 		}
 	)
+	-- Toggle custom icons
+	MCM.AddSetting(
+		mcmName,
+		"General",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowCustomIcons"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowCustomIcons"] then
+					onOff = "True"
+				end
+				return "Show custom Icons: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowCustomIcons"] = currentBool
+			end,
+			Info = { "Toggle if boss specific icons should be shown","Will display the vanilla icon otherwise"}
+		}
+	)
 	-- Bar padding
 	MCM.AddSetting(
         mcmName,
@@ -162,6 +184,27 @@ if MCMLoaded then
 				HPBars.Config["BarsPerRow"] = currentNum
 			end,
 			Info = {"Number of bars per row displayed"}
+		}
+	)
+	-- Enable Champion coloring
+	MCM.AddSetting(
+		mcmName,
+		"General",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["UseChampionColors"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["UseChampionColors"] then
+					onOff = "True"
+				end
+				return "Use Champion coloring: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["UseChampionColors"] = currentBool
+			end,
 		}
 	)
 	-- Enable Flashing

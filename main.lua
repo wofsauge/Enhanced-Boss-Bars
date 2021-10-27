@@ -60,6 +60,10 @@ function HPBars:isTableEqual(table1, table2)
 	return true
 end
 
+function HPBars:copyColor(color)
+	return Color(color.R, color.G, color.B, color.A, color.RO, color.GO, color.BO)
+end
+
 ---------------------------------------------------------------------------
 -------------------------------Main Logic----------------------------------
 function HPBars:evaluateConditionals(bossDefinition, tableEntry)
@@ -146,20 +150,25 @@ function HPBars:updateSprites(tableEntry)
 	local iconToLoad =
 		HPBars:evaluateConditionals(bossDefinition, tableEntry) or bossDefinition.sprite or barStyle.defaultIcon
 	if iconToLoad ~= tableEntry.currentIcon then
-		if bossDefinition.iconAnm2 then
-			tableEntry.iconSprite:Load(bossDefinition.iconAnm2, true)
-		end
-		for i = 0, tableEntry.iconSprite:GetLayerCount() - 1 do
-			tableEntry.iconSprite:ReplaceSpritesheet(i, iconToLoad)
-		end
-		tableEntry.iconSprite:LoadGraphics()
+		if HPBars.Config.ShowCustomIcons then
+			if bossDefinition.iconAnm2 then
+				tableEntry.iconSprite:Load(bossDefinition.iconAnm2, true)
+			end
+			for i = 0, tableEntry.iconSprite:GetLayerCount() - 1 do
+				tableEntry.iconSprite:ReplaceSpritesheet(i, iconToLoad)
+			end
+			tableEntry.iconSprite:LoadGraphics()
 
-		if bossDefinition.iconAnimationType then
-			tableEntry.iconSprite:Play(tableEntry.iconSprite:GetDefaultAnimation(), true)
-			tableEntry.iconAnimationType = bossDefinition.iconAnimationType
+			if bossDefinition.iconAnimationType then
+				tableEntry.iconSprite:Play(tableEntry.iconSprite:GetDefaultAnimation(), true)
+				tableEntry.iconAnimationType = bossDefinition.iconAnimationType
+			end
+			tableEntry.iconOffset = bossDefinition.offset or tableEntry.iconOffset
 		end
-		tableEntry.iconOffset = bossDefinition.offset or tableEntry.iconOffset
 
+		if tableEntry.entityColor then
+			tableEntry.iconSprite.Color = tableEntry.entityColor
+		end
 		tableEntry.ignoreInvincible = bossDefinition.ignoreInvincible
 		tableEntry.currentIcon = iconToLoad
 	end
@@ -190,11 +199,18 @@ function HPBars:createNewBossBar(entity)
 
 	local bossHPsprite = Sprite()
 	bossHPsprite:Load(barStyle.barAnm2, true)
+	local entityNPC = entity:ToNPC()
+	local championColor =
+		entityNPC and HPBars.Config.UseChampionColors and
+		(entityNPC:GetChampionColorIdx() >= 0 or entityNPC:GetBossColorIdx()) and
+		HPBars:copyColor(entity:GetColor()) or
+		nil
 
 	local newEntry = {
 		entity = entity,
 		hp = entity.HitPoints or 0,
 		maxHP = entity.MaxHitPoints or 0,
+		entityColor = championColor,
 		iconSprite = icon,
 		iconOffset = Vector(-4, 0),
 		iconAnimationType = "HP",
@@ -383,14 +399,13 @@ end
 
 function HPBars:handleBadLoad()
 	if badload then
-		Isaac.RenderText("Enhanced Boss Bars detected a conflicting mod or first installation!", 40,30, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("Please deactivate all other mods that alter the Boss bar sprites and", 40,40, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("Restart your game!", 40,50, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("(This tends to happen when the mod is first installed, a conflicting", 40,70, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("mod is enabled, or when the mod is re-enabled via the mod menu)", 40,80, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("Enhanced Boss Bars detected a conflicting mod or first installation!", 40, 30, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("Please deactivate all other mods that alter the Boss bar sprites and", 40, 40, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("Restart your game!", 40, 50, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("(This tends to happen when the mod is first installed, a conflicting", 40, 70, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("mod is enabled, or when the mod is re-enabled via the mod menu)", 40, 80, 1, 0.5, 0.5, 1)
 	end
 end
-
 
 function HPBars:onRender()
 	HPBars:handleBadLoad()
@@ -480,8 +495,8 @@ function HPBars:evaluateBadLoad()
 	testSprite:LoadGraphics()
 	testSprite:Play("bg100")
 
-	for x = -10,10 do
-		local qcolor = testSprite:GetTexel(Vector(x,0),Vector.Zero,1,0)
+	for x = -10, 10 do
+		local qcolor = testSprite:GetTexel(Vector(x, 0), Vector.Zero, 1, 0)
 		if qcolor.Red ~= 1 or qcolor.Green ~= 1 or qcolor.Blue ~= 1 or qcolor.Alpha ~= 1 then
 			return true
 		end
