@@ -403,11 +403,11 @@ function HPBars:onRender()
 	local barSizesTable = isVertical and HPBars.barSizes.vertical or HPBars.barSizes.horizontal
 	local rowOffset = HPBars:getRowOffset()
 	local barsPerRow = isVertical and HPBars.Config.BarsPerRow - 1 or HPBars.Config.BarsPerRow
-	local rowCount = math.ceil(currentBossCount /barsPerRow)
+	local rowCount = math.ceil(currentBossCount / barsPerRow)
 	--handle boss hp bar
 	for row = 0, rowCount - 1 do
 		local bossesInRow = math.min(currentBossCount - row * barsPerRow, barsPerRow)
-		local barSize = barSizesTable[math.min(bossesInRow, barsPerRow)]
+		local barSize = barSizesTable[math.min(bossesInRow, barsPerRow, 10)]
 		local barPositionStart = HPBars:getBarPosition(bossesInRow) - (rowCount - 1) * rowOffset + row * rowOffset
 		local barSizePercent = math.floor(barSize / barSizesTable[1] * 100)
 
