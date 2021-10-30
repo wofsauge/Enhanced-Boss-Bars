@@ -318,6 +318,11 @@ HPBars.BarStyles = {
 		idleColoring = HPBars.BarColorings.none,
 		tooltip = "'Mother' - Boss themed"
 	},
+	["Steven"] = {
+		sprite = barPath .. "bosses/bossbar_steven.png",
+		idleColoring = HPBars.BarColorings.none,
+		tooltip = "'Steven' - Boss themed"
+	},
 	["Ultra Greed"] = {
 		sprite = barPath .. "bosses/bossbar_ultra_greed.png",
 		idleColoring = HPBars.BarColorings.none,
@@ -623,7 +628,7 @@ HPBars.BossDefinitions = {
 	["78.0"] = {sprite = path .. "final/moms_heart.png", offset = Vector(-6, 0)},
 	["78.1"] = {sprite = path .. "final/it_lives.png", offset = Vector(-8, 0)},
 	["79.0"] = {sprite = path .. "chapter1/gemini_contusion.png", offset = Vector(-6, 0)},
-	["79.1"] = {sprite = path .. "chapter1/steven_big.png", offset = Vector(-5, 0)},
+	["79.1"] = {sprite = path .. "chapter1/steven_big.png", barStyle = "Steven", offset = Vector(-5, 0)},
 	["79.2"] = {sprite = path .. "chapter1/blighted_ovum.png", offset = Vector(-4, 0)},
 	["79.10"] = {
 		sprite = path .. "chapter1/gemini_suture.png",
@@ -634,6 +639,7 @@ HPBars.BossDefinitions = {
 	},
 	["79.11"] = {
 		sprite = path .. "chapter1/steven_small.png",
+		barStyle = "Steven",
 		conditionalSprites = {
 			{"animationNameEndsWith", path .. "chapter1/steven_small_angry.png", {"02"}}
 		},
