@@ -198,6 +198,9 @@ end
 function HPBars:evaluateEntityIgnore(entity)
 	local entityString = entity.Type .. "." .. entity.Variant
 	local ignoreEntry = HPBars.BossIgnoreList[entityString]
+	if entity:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) then
+		return true
+	end
 	if ignoreEntry then
 		if type(ignoreEntry) == "function" then
 			return ignoreEntry(entity)
