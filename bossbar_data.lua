@@ -522,9 +522,9 @@ HPBars.BossDefinitions = {
 		offset = Vector(-6, 0)
 	},
 	["20.0"] = {sprite = path .. "chapter1/monstro.png", ignoreInvincible = true, offset = Vector(-5, 0)},
-	["28.0"] = {sprite = path .. "chapter2/chub.png", offset = Vector(-5, 0)},
-	["28.1"] = {sprite = path .. "chapter2/chad.png", offset = Vector(-5, 0)},
-	["28.2"] = {sprite = path .. "chapter2/carrion_queen.png", offset = Vector(-5, 0)},
+	["28.0"] = {sprite = path .. "chapter2/chub.png", offset = Vector(-4, 0)},
+	["28.1"] = {sprite = path .. "chapter2/chad.png", offset = Vector(-4, 0)},
+	["28.2"] = {sprite = path .. "chapter2/carrion_queen.png", offset = Vector(-4, 0)},
 	["36.0"] = {sprite = path .. "chapter2/gurdy.png", offset = Vector(-9, -3)},
 	["38.2"] = {sprite = path .. "minibosses/ultra_pride_florian.png", offset = Vector(-5, 0)},
 	["43.0"] = {sprite = path .. "chapter3/monstro_two.png", offset = Vector(-4, 0)},
@@ -585,8 +585,8 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-5, 0)
 	},
-	["65.0"] = {sprite = path .. "horsemen/war.png", offset = Vector(-7, 0)},
-	["65.10"] = {sprite = path .. "horsemen/war_phase2.png", offset = Vector(-7, 0)},
+	["65.0"] = {sprite = path .. "horsemen/war.png", offset = Vector(-5, 0)},
+	["65.10"] = {sprite = path .. "horsemen/war_phase2.png", offset = Vector(-5, 0)},
 	["65.1"] = {sprite = path .. "horsemen/conquest.png", offset = Vector(-7, 0)},
 	["66.0"] = {
 		sprite = path .. "horsemen/death.png",
@@ -605,10 +605,10 @@ HPBars.BossDefinitions = {
 			{"isI1Equal", path .. "chapter2/peep_one_eye.png", {1}},
 			{"isI1Equal", path .. "chapter2/peep_no_eyes.png", {2}}
 		},
-		offset = Vector(-6, 0)
+		offset = Vector(-5, 0)
 	},
 	["68.1"] = {sprite = path .. "chapter3/the_bloat.png", offset = Vector(-6, 0)},
-	["69.0"] = {sprite = path .. "chapter3/loki.png", offset = Vector(-5, 0)},
+	["69.0"] = {sprite = path .. "chapter3/loki.png", offset = Vector(-4, 0)},
 	["69.1"] = {
 		sprite = path .. "chapter4/lokii.png",
 		conditionalSprites = {
@@ -658,7 +658,7 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-4, 2)
 	},
-	["98.0"] = {sprite = path .. "chapter3/heart_of_infamy.png", offset = Vector(-3, 0)},
+	["98.0"] = {sprite = path .. "chapter3/heart_of_infamy.png", offset = Vector(-2, 0)},
 	["99.0"] = {sprite = path .. "chapter2/gurdy_jr.png", offset = Vector(-5, 0)},
 	["100.0"] = {sprite = path .. "chapter1/widow.png", offset = Vector(-6, 0)},
 	["100.1"] = {sprite = path .. "chapter2/the_wretched.png", offset = Vector(-6, 0)},
@@ -700,7 +700,7 @@ HPBars.BossDefinitions = {
 	},
 	["261.0"] = {sprite = path .. "chapter1/dingle.png", offset = Vector(-5, 0)},
 	["261.1"] = {sprite = path .. "chapter1/dangle.png", offset = Vector(-7, 0)},
-	["262.0"] = {sprite = path .. "chapter2/mega_maw.png", offset = Vector(-6, 0)},
+	["262.0"] = {sprite = path .. "chapter2/mega_maw.png", offset = Vector(-5, 0)},
 	["263.0"] = {sprite = path .. "chapter3/the_gate.png", offset = Vector(-6, 0)},
 	["264.0"] = {sprite = path .. "chapter2/mega_fatty.png", offset = Vector(-7, 0)},
 	["265.0"] = {sprite = path .. "chapter3/the_cage.png", offset = Vector(-7, 0)},
@@ -710,10 +710,10 @@ HPBars.BossDefinitions = {
 	["269.0"] = {sprite = path .. "chapter2/polycephalus.png", offset = Vector(-10, 0)},
 	["269.1"] = {sprite = path .. "chapter3/the_pile.png", offset = Vector(-10, 0)},
 	["270.0"] = {sprite = path .. "chapter4/mr_fred.png", offset = Vector(-6, 0)},
-	["271.0"] = {sprite = path .. "minibosses/uriel.png", offset = Vector(-6, 0)},
-	["271.1"] = {sprite = path .. "minibosses/fallen_uriel.png", offset = Vector(-6, 0)},
-	["272.0"] = {sprite = path .. "minibosses/gabriel.png", offset = Vector(-6, 0)},
-	["272.1"] = {sprite = path .. "minibosses/fallen_gabriel.png", offset = Vector(-6, 0)},
+	["271.0"] = {sprite = path .. "minibosses/uriel.png", offset = Vector(-5, 0)},
+	["271.1"] = {sprite = path .. "minibosses/fallen_uriel.png", offset = Vector(-5, 0)},
+	["272.0"] = {sprite = path .. "minibosses/gabriel.png", offset = Vector(-5, 0)},
+	["272.1"] = {sprite = path .. "minibosses/fallen_gabriel.png", offset = Vector(-5, 0)},
 	["273.0"] = {sprite = path .. "final/the_lamb.png", offset = Vector(-6, 0)},
 	["273.10"] = {sprite = path .. "final/the_lamb_body.png", offset = Vector(-9, 0)},
 	["274.0"] = {
