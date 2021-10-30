@@ -1,5 +1,5 @@
 HPBars = RegisterMod("Enhanced Boss bars", 1)
-HPBars.Version = 1.0
+HPBars.Version = 1.9
 HPBars.iconPath = "gfx/ui/bosshp_icons/"
 HPBars.barPath = "gfx/ui/bosshp_bars/"
 
@@ -622,11 +622,11 @@ function OnGameStart(_, isSave)
 	if savedConfig.Version == HPBars.Config.Version then
 		local isDefaultConfig = true
 		for key, value in pairs(HPBars.Config) do
-			if type(value) ~= type(HPBars.DefaultConfig[key]) then
+			if type(value) ~= type(HPBars.PresetConfigs.Default[key]) then
 				print("Enhanced Boss Bar - Warning! : Config value '" .. key .. "' has wrong data-type. Resetting it to default...")
-				HPBars.Config[key] = HPBars.DefaultConfig[key]
+				HPBars.Config[key] = HPBars.PresetConfigs.Default[key]
 			end
-			if HPBars.DefaultConfig[key] ~= value then
+			if HPBars.PresetConfigs.Default[key] ~= value then
 				isDefaultConfig = false
 			end
 		end

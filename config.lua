@@ -88,8 +88,9 @@ HPBars.UserConfig = {
 --------------------------------------------------
 --------------------------------------------------
 
+HPBars.PresetConfigs = {}
 
-HPBars.DefaultConfig = {
+HPBars.PresetConfigs.Default = {
     ["BarStyle"] = "Default",
     ["Position"] = "Bottom",
     ["Sorting"] = "Segments",
@@ -109,6 +110,31 @@ HPBars.DefaultConfig = {
     ["ShowInBeastFight"] = true,
     ["ShowInMotherFight"] = true,
     ["ShowMegaSatan"] = true,
+    
+    ["InfoText"] = "None",
+    ["TextTransparency"] = 1,
+}
+
+HPBars.PresetConfigs.Vanilla = {
+    ["BarStyle"] = "Default",
+    ["Position"] = "Bottom",
+    ["Sorting"] = "Vanilla",
+    ["EnableSpecificBossbars"] = false,
+    ["ShowNotches"] = false,
+    ["BarsPerRow"] = 7,    
+    ["BarPadding"] = 15,
+    ["ScreenPadding"] = 17,
+    ["EnableFlashing"] = true,
+    ["DisplayWithSpidermod"] = true,
+
+    ["ShowIcons"] = true,
+    ["ShowCustomIcons"] = false,
+    ["UseChampionColors"] = false,
+
+    ["ShowDarkEsau"] = false,
+    ["ShowInBeastFight"] = false,
+    ["ShowInMotherFight"] = false,
+    ["ShowMegaSatan"] = false,
     
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,

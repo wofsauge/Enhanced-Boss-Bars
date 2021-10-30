@@ -33,6 +33,59 @@ if MCMLoaded then
 	MCM.AddSpace(mcmName, "Info")
 
 	---------------------------------------------------------------------------
+	---------------------------------Presets-----------------------------------
+	MCM.AddText(mcmName, "Presets", function() return "Apply a Preset configuration" end)
+	MCM.AddSpace(mcmName, "Presets")
+
+	
+    local availablePresets = {}
+    for k,v in pairs(HPBars.PresetConfigs) do
+        table.insert(availablePresets,k)
+    end
+	local selectedPreset = 1
+    table.sort(availablePresets)
+	local presetTooltips = {
+		["Default"] = {"Recommended settings", "Enhances the gameplay and adds a lot of QoL features"},
+		["Vanilla"] = {"Vanilla experience", "Tries to emulate the exact behavior as it is in the main game"}
+	}
+
+    MCM.AddSetting(
+        mcmName,
+        "Presets",
+        {
+            Type = ModConfigMenu.OptionType.NUMBER,
+            CurrentSetting = function()
+                return AnIndexOf(availablePresets, selectedPreset)
+            end,
+            Minimum = 1,
+            Maximum = #availablePresets,
+            Display = function()
+                return availablePresets[selectedPreset]
+            end,
+            OnChange = function(currentNum)
+				selectedPreset = currentNum == selectedPreset and 1 or currentNum
+            end,
+            Info = function() return presetTooltips[availablePresets[selectedPreset]] end
+        }
+    )
+
+	MCM.AddSpace(mcmName, "Presets")
+
+	MCM.AddSetting(
+		mcmName,
+		"Presets",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function() return true end,
+			Display = function() return "--> APPLY PRESET" end,
+			OnChange = function(currentBool)
+				HPBars.Config = HPBars.PresetConfigs[availablePresets[selectedPreset]]
+			end,
+			Info = {"Press SPACE to apply the changes"}
+		}
+	)
+
+	---------------------------------------------------------------------------
 	---------------------------------General-----------------------------------
     -- Bar Style
     local availableStyles = {}
