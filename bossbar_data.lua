@@ -513,7 +513,7 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-6, 0)
 	},
-	["20.0"] = {sprite = path .. "chapter1/monstro.png", offset = Vector(-5, 0)},
+	["20.0"] = {sprite = path .. "chapter1/monstro.png", ignoreInvincible = true, offset = Vector(-5, 0)},
 	["28.0"] = {sprite = path .. "chapter2/chub.png", offset = Vector(-5, 0)},
 	["28.1"] = {sprite = path .. "chapter2/chad.png", offset = Vector(-5, 0)},
 	["28.2"] = {sprite = path .. "chapter2/carrion_queen.png", offset = Vector(-5, 0)},
@@ -523,6 +523,7 @@ HPBars.BossDefinitions = {
 	["43.1"] = {sprite = path .. "chapter3/gish.png", offset = Vector(-5, 0)},
 	["45.10"] = {
 		sprite = path .. "final/mom.png",
+		ignoreInvincible = true,
 		conditionalSprites = {
 			{"isStageType", path .. "final/mausoleum_mom.png", {StageType.STAGETYPE_REPENTANCE}},
 			{"isStageType", path .. "final/mausoleum_mom.png", {StageType.STAGETYPE_REPENTANCE_B}}
