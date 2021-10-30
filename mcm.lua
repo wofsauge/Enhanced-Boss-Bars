@@ -437,7 +437,7 @@ if MCMLoaded then
 			OnChange = function(currentBool)
 				HPBars.Config["ShowMegaSatan"] = currentBool
 			end,
-			Info = {"Enables / disables the bar for Mega Satan"}
+			Info = {"Toggles the bars in the Mega Satan fight"}
 		}
 	)
 	-- Toggle boss designs

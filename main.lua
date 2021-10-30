@@ -510,11 +510,18 @@ function HPBars:hasSpiderMod()
 	end
 end
 
+function HPBars:isIgnoreMegaSatanFight()
+	return not HPBars.Config.ShowMegaSatan and game:GetRoom():GetBossID() == 55
+end
+
 function HPBars:onRender()
 	HPBars:handleBadLoad()
 	HPBars:updateRoomEntities()
 	local currentBossCount = #currentBossesSorted
-	if currentBossCount <= 0 or not HPBars.Config.DisplayWithSpidermod and HPBars:hasSpiderMod() then
+	if currentBossCount <= 0 then
+		return
+	end
+	if HPBars:isIgnoreMegaSatanFight() or not HPBars.Config.DisplayWithSpidermod and HPBars:hasSpiderMod() then
 		return
 	end
 	local isVertical = HPBars:isVerticalLayout()
