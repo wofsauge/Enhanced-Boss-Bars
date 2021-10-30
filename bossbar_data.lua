@@ -123,6 +123,9 @@ HPBars.BossIgnoreList = {
 	["274.2"] = function(entity) -- Mega satan before activation
 		return entity:ToNPC().State == 2 or not HPBars.Config.ShowMegaSatan
 	end,
+	["275.0"] = function(entity) -- Mega satan phase 2
+		return not HPBars.Config.ShowMegaSatan
+	end,
 	["266.1"] = true, -- mama gurdy hand
 	["266.2"] = true, -- mama gurdy hand
 	["294.0"] = true, -- Ultra greed door
