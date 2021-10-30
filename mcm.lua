@@ -61,7 +61,7 @@ if MCMLoaded then
             Info = function() return {HPBars.BarStyles[HPBars.Config["BarStyle"]].tooltip or "", " ("..AnIndexOf(availableStyles, HPBars.Config["BarStyle"]).."/"..#availableStyles..")"} end
         }
     )
-	-- Item Name Language
+	-- Bar Positioning
 	local positions = {"Bottom", "Top", "Left","Right"}
 	MCM.AddSetting(
 		mcmName,
@@ -81,6 +81,29 @@ if MCMLoaded then
 				HPBars.Config["Position"] = positions[currentNum]
 			end,
 			Info = {"General position of the boss bar"}
+		}
+	)
+	-- Sorting mode
+	local sortingModes = {"Segments", "Bosses", "Vanilla"}
+	local sortingModesTooltips = {"Segments: Boss-segments have their own bars", "Bosses: Each boss has their own bar, segmented bosses only have one bar", "Vanilla: One bar for all bosses"}
+	MCM.AddSetting(
+		mcmName,
+		"General",
+		{
+			Type = ModConfigMenu.OptionType.NUMBER,
+			CurrentSetting = function()
+				return AnIndexOf(sortingModes, HPBars.Config["Sorting"])
+			end,
+			Minimum = 1,
+			Maximum = #sortingModes,
+			Display = function()
+				return "Sorting: " .. HPBars.Config["Sorting"]
+			end,
+			OnChange = function(currentNum)
+                HPBars:removeBarEntry(Isaac.GetPlayer())
+				HPBars.Config["Sorting"] = sortingModes[currentNum]
+			end,
+			Info = function() return {"Sorting of the boss bars",sortingModesTooltips[AnIndexOf(sortingModes, HPBars.Config["Sorting"])]} end
 		}
 	)
 	-- Toggle icons

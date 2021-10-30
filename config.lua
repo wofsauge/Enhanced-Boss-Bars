@@ -7,6 +7,12 @@ HPBars.UserConfig = {
     -- Possible Values: [Top, Bottom, Left, Right]
     -- Default value: "Bottom"
     ["Position"] = "Bottom",
+    -- Sorting of the bar. This can have the following options:
+    --      "Segments": Shows one bar for each boss and their segments
+    --      "Bosses":   Shows one bar for each boss, but summarizes segmented bosses into one boss
+    --      "Vanilla":  Shows only one bar and summarizes all bosses into that one bar
+    -- Default value: "Segments"
+    ["Sorting"] = "Segments",
     -- Toggle if icons should be shown at all
     -- Default value: true
     ["ShowIcons"] = true,
@@ -83,6 +89,7 @@ HPBars.UserConfig = {
 HPBars.DefaultConfig = {
     ["BarStyle"] = "Default",
     ["Position"] = "Bottom",
+    ["Sorting"] = "Segments",
     ["ShowIcons"] = true,
     ["ShowCustomIcons"] = true,
     ["EnableSpecificBossbars"] = true,

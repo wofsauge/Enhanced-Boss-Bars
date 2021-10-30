@@ -97,101 +97,110 @@ function HPBars:getBarStyle(barStyle)
 	return combinedStyle
 end
 
-function HPBars:applyBarStyle(tableEntry, barStyle)
-	if not barStyle or not tableEntry then
+function HPBars:setBarStyle(bossEntry, barStyle)
+	if not HPBars:isTableEqual(barStyle, bossEntry.currentStyle) then
+		HPBars:applyBarStyle(bossEntry, barStyle)
+		bossEntry.currentStyle = barStyle
+	end
+end
+
+function HPBars:setIcon(bossEntry, iconToLoad, bossDefinition)
+	if iconToLoad ~= bossEntry.currentIcon then
+		if HPBars.Config.ShowCustomIcons then
+			if bossDefinition.iconAnm2 then
+				bossEntry.iconSprite:Load(bossDefinition.iconAnm2, true)
+			end
+			for i = 0, bossEntry.iconSprite:GetLayerCount() - 1 do
+				bossEntry.iconSprite:ReplaceSpritesheet(i, iconToLoad)
+			end
+			bossEntry.iconSprite:LoadGraphics()
+
+			if bossDefinition.iconAnimationType then
+				bossEntry.iconSprite:Play(bossEntry.iconSprite:GetDefaultAnimation(), true)
+				bossEntry.iconAnimationType = bossDefinition.iconAnimationType
+			end
+			bossEntry.iconOffset = bossDefinition.offset or bossEntry.iconOffset
+		end
+
+		if bossEntry.entityColor then
+			bossEntry.iconSprite.Color = bossEntry.entityColor
+		end
+		bossEntry.ignoreInvincible = bossDefinition.ignoreInvincible
+		bossEntry.currentIcon = iconToLoad
+	end
+end
+
+function HPBars:applyBarStyle(bossEntry, barStyle)
+	if not barStyle or not bossEntry then
 		return
 	end
 	local isVertical = HPBars:isVerticalLayout()
 	local barAnm2 = isVertical and barStyle.verticalAnm2 or barStyle.barAnm2
-	tableEntry.barSprite:Load(barAnm2, true)
+	bossEntry.barSprite:Load(barAnm2, true)
 
 	local overlayAnm2 = isVertical and barStyle.verticalOverlayAnm2 or barStyle.overlayAnm2
 	if overlayAnm2 then
-		tableEntry.barOverlaySprite = Sprite()
-		tableEntry.barOverlaySprite:Load(overlayAnm2, true)
+		bossEntry.barOverlaySprite = Sprite()
+		bossEntry.barOverlaySprite:Load(overlayAnm2, true)
 		if barStyle.overlaySprite then
 			local overlaySprite = isVertical and barStyle.verticalOverlaySprite or barStyle.overlaySprite
-			for i = 0, tableEntry.barOverlaySprite:GetLayerCount() - 1 do
-				tableEntry.barOverlaySprite:ReplaceSpritesheet(i, overlaySprite)
+			for i = 0, bossEntry.barOverlaySprite:GetLayerCount() - 1 do
+				bossEntry.barOverlaySprite:ReplaceSpritesheet(i, overlaySprite)
 			end
-			tableEntry.barOverlaySprite:LoadGraphics()
+			bossEntry.barOverlaySprite:LoadGraphics()
 		end
 	end
 	if barStyle.notchAnm2 and barStyle.notchAnm2 ~= "NONE" then
-		tableEntry.notchSprite = Sprite()
-		tableEntry.notchSprite:Load(barStyle.notchAnm2, true)
+		bossEntry.notchSprite = Sprite()
+		bossEntry.notchSprite:Load(barStyle.notchAnm2, true)
 		if barStyle.notchSprite then
-			for i = 0, tableEntry.notchSprite:GetLayerCount() - 1 do
-				tableEntry.notchSprite:ReplaceSpritesheet(i, barStyle.notchSprite)
+			for i = 0, bossEntry.notchSprite:GetLayerCount() - 1 do
+				bossEntry.notchSprite:ReplaceSpritesheet(i, barStyle.notchSprite)
 			end
-			tableEntry.notchSprite:LoadGraphics()
+			bossEntry.notchSprite:LoadGraphics()
 		end
 	end
 
 	local barSprite = isVertical and barStyle.verticalSprite or barStyle.sprite
 	if barStyle.sprite then
-		for i = 0, tableEntry.barSprite:GetLayerCount() - 1 do
-			tableEntry.barSprite:ReplaceSpritesheet(i, barSprite)
+		for i = 0, bossEntry.barSprite:GetLayerCount() - 1 do
+			bossEntry.barSprite:ReplaceSpritesheet(i, barSprite)
 		end
 	end
-	tableEntry.barSprite:LoadGraphics()
+	bossEntry.barSprite:LoadGraphics()
 	if barStyle.barAnimationType == "Animated" then
-		tableEntry.barSprite:Play(tableEntry.barSprite:GetDefaultAnimation(), true)
+		bossEntry.barSprite:Play(bossEntry.barSprite:GetDefaultAnimation(), true)
 	end
 	if barStyle.overlayAnimationType == "Animated" then
-		tableEntry.barOverlaySprite:Play(tableEntry.barOverlaySprite:GetDefaultAnimation(), true)
+		bossEntry.barOverlaySprite:Play(bossEntry.barOverlaySprite:GetDefaultAnimation(), true)
 	end
 	if barStyle.notchAnimationType == "Animated" then
-		tableEntry.notchSprite:Play(tableEntry.notchSprite:GetDefaultAnimation(), true)
+		bossEntry.notchSprite:Play(bossEntry.notchSprite:GetDefaultAnimation(), true)
 	end
-	tableEntry.barStyle = barStyle
+	bossEntry.barStyle = barStyle
 end
 
-function HPBars:updateSprites(tableEntry)
-	local bossDefinition = HPBars.BossDefinitions[tableEntry.entity.Type .. "." .. tableEntry.entity.Variant]
+function HPBars:updateSprites(bossEntry)
+	local bossDefinition = HPBars.BossDefinitions[bossEntry.entity.Type .. "." .. bossEntry.entity.Variant]
 	if bossDefinition == nil then
 		bossDefinition = HPBars.BossDefinitions["UNDEFINED"]
 	end
 
-	local newStyle = HPBars.Config.EnableSpecificBossbars and bossDefinition.barStyle or tableEntry.barStyle
+	local newStyle = HPBars.Config.EnableSpecificBossbars and bossDefinition.barStyle or bossEntry.barStyle
 	barStyle = HPBars:getBarStyle(newStyle)
-	if not HPBars:isTableEqual(barStyle, tableEntry.currentStyle) then
-		HPBars:applyBarStyle(tableEntry, barStyle)
-		tableEntry.currentStyle = barStyle
-	end
+	HPBars:setBarStyle(bossEntry, barStyle)
 
 	local iconToLoad =
-		HPBars:evaluateConditionals(bossDefinition, tableEntry) or bossDefinition.sprite or barStyle.defaultIcon
-	if iconToLoad ~= tableEntry.currentIcon then
-		if HPBars.Config.ShowCustomIcons then
-			if bossDefinition.iconAnm2 then
-				tableEntry.iconSprite:Load(bossDefinition.iconAnm2, true)
-			end
-			for i = 0, tableEntry.iconSprite:GetLayerCount() - 1 do
-				tableEntry.iconSprite:ReplaceSpritesheet(i, iconToLoad)
-			end
-			tableEntry.iconSprite:LoadGraphics()
+		HPBars:evaluateConditionals(bossDefinition, bossEntry) or bossDefinition.sprite or barStyle.defaultIcon
 
-			if bossDefinition.iconAnimationType then
-				tableEntry.iconSprite:Play(tableEntry.iconSprite:GetDefaultAnimation(), true)
-				tableEntry.iconAnimationType = bossDefinition.iconAnimationType
-			end
-			tableEntry.iconOffset = bossDefinition.offset or tableEntry.iconOffset
-		end
-
-		if tableEntry.entityColor then
-			tableEntry.iconSprite.Color = tableEntry.entityColor
-		end
-		tableEntry.ignoreInvincible = bossDefinition.ignoreInvincible
-		tableEntry.currentIcon = iconToLoad
+	HPBars:setIcon(bossEntry, iconToLoad, bossDefinition)
+	bossEntry.iconSprite:Update()
+	bossEntry.barSprite:Update()
+	if bossEntry.barOverlaySprite then
+		bossEntry.barOverlaySprite:Update()
 	end
-	tableEntry.iconSprite:Update()
-	tableEntry.barSprite:Update()
-	if tableEntry.barOverlaySprite then
-		tableEntry.barOverlaySprite:Update()
-	end
-	if tableEntry.notchSprite then
-		tableEntry.notchSprite:Update()
+	if bossEntry.notchSprite then
+		bossEntry.notchSprite:Update()
 	end
 end
 
@@ -310,25 +319,63 @@ function HPBars:updateRoomEntities()
 	)
 
 	currentBossesSorted = {}
+
+	if HPBars.Config.Sorting == "Vanilla" and #sortedBosses > 0 then
+		local mainBoss = sortedBosses[1]
+		mainBoss.sumMaxHP = 0
+		mainBoss.sumHP = 0
+		mainBoss.entityColor = HPBars.BarColorings.none
+		if #sortedBosses > 1 then
+			barStyle = HPBars:getBarStyle(HPBars.Config["BarStyle"])
+			HPBars:setBarStyle(mainBoss, barStyle)
+			HPBars:setIcon(mainBoss, barStyle.defaultIcon, {})
+		end
+
+		for i, boss in ipairs(sortedBosses) do
+			mainBoss.sumMaxHP = mainBoss.sumMaxHP + boss.maxHP
+			mainBoss.sumHP = mainBoss.sumHP + boss.hp
+			mainBoss.ignoreInvincible = mainBoss.ignoreInvincible or boss.ignoreInvincible
+			if boss.lastStateChangeFrame > mainBoss.lastStateChangeFrame then
+				mainBoss.lastStateChangeFrame = boss.lastStateChangeFrame
+				mainBoss.hitState = boss.hitState
+			end
+		end
+		table.insert(currentBossesSorted, mainBoss)
+		return
+	end
+
 	local visitedBosses = {}
 	for i, boss in ipairs(sortedBosses) do
 		local bossPtr = GetPtrHash(boss.entity)
+		boss.sumMaxHP = boss.maxHP
+		boss.sumHP = boss.hp
+
 		if boss.entity.Parent == nil and not visitedBosses[bossPtr] then
 			-- add parent to sorted list
-			table.insert(currentBossesSorted, boss)
 			visitedBosses[bossPtr] = true
 			-- add children to sorted list
 			local curChild = boss.entity.Child
 			while curChild ~= nil do
 				local childPtr = GetPtrHash(curChild)
-				if HPBars.currentBosses[childPtr] and not visitedBosses[childPtr] then
+				local childEntry = HPBars.currentBosses[childPtr]
+				if childEntry and not visitedBosses[childPtr] then
 					visitedBosses[childPtr] = true
-					table.insert(currentBossesSorted, HPBars.currentBosses[childPtr])
+					if HPBars.Config.Sorting == "Segments" then
+						table.insert(currentBossesSorted, childEntry)
+					else
+						boss.sumMaxHP = boss.sumMaxHP + childEntry.maxHP
+						boss.sumHP = boss.sumHP + childEntry.hp
+						if childEntry.lastStateChangeFrame > boss.lastStateChangeFrame then
+							boss.lastStateChangeFrame = childEntry.lastStateChangeFrame
+							boss.hitState = childEntry.hitState
+						end
+					end
 				else
 					break
 				end
 				curChild = curChild.Child
 			end
+			table.insert(currentBossesSorted, boss)
 		end
 	end
 	-- add entries that where not handled from the loop aboth
@@ -386,9 +433,9 @@ function HPBars:renderInfoText(bossEntry, barPos, barSize)
 
 	local text = ""
 	if HPBars.Config.InfoText == "Percent" then
-		text = math.ceil((bossEntry.hp / bossEntry.maxHP) * 100) .. "%"
+		text = math.ceil((bossEntry.sumHP / bossEntry.sumMaxHP) * 100) .. "%"
 	elseif HPBars.Config.InfoText == "HPLeft" then
-		text = math.ceil(bossEntry.hp * 10) / 10
+		text = math.ceil(bossEntry.sumHP * 10) / 10
 	end
 	local textSize = Isaac.GetTextWidth(text)
 	local transparency = HPBars.Config.TextTransparency
@@ -451,6 +498,10 @@ function HPBars:handleBadLoad()
 	end
 end
 
+function HPBars:getHPPercent(bossEntry)
+	return math.max(0, math.ceil((bossEntry.sumHP / bossEntry.sumMaxHP) * 100))
+end
+
 function HPBars:onRender()
 	HPBars:handleBadLoad()
 	HPBars:updateRoomEntities()
@@ -479,7 +530,7 @@ function HPBars:onRender()
 			if isVertical then
 				barPos = barPositionStart - Vector(0, slotInRow * (barSize + padding))
 			end
-			local hpbarFill = 100 - math.min(math.ceil((boss.hp / boss.maxHP) * 100), 99)
+			local hpbarFill = 100 - math.min(HPBars:getHPPercent(boss), 99)
 			-- render bg
 			boss.barSprite.Rotation = isVertical and -90 or 0
 			if boss.barStyle.barAnimationType == "HP" then
