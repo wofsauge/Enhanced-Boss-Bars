@@ -34,7 +34,7 @@ if MCMLoaded then
 
 	---------------------------------------------------------------------------
 	---------------------------------General-----------------------------------
-    -- Language
+    -- Bar Style
     local availableStyles = {}
     for k,v in pairs(HPBars.BarStyles) do
         table.insert(availableStyles,k)
@@ -104,49 +104,6 @@ if MCMLoaded then
 				HPBars.Config["Sorting"] = sortingModes[currentNum]
 			end,
 			Info = function() return {"Sorting of the boss bars",sortingModesTooltips[AnIndexOf(sortingModes, HPBars.Config["Sorting"])]} end
-		}
-	)
-	-- Toggle icons
-	MCM.AddSetting(
-		mcmName,
-		"General",
-		{
-			Type = ModConfigMenu.OptionType.BOOLEAN,
-			CurrentSetting = function()
-				return HPBars.Config["ShowIcons"]
-			end,
-			Display = function()
-				local onOff = "False"
-				if HPBars.Config["ShowIcons"] then
-					onOff = "True"
-				end
-				return "Show Icons: " .. onOff
-			end,
-			OnChange = function(currentBool)
-				HPBars.Config["ShowIcons"] = currentBool
-			end,
-		}
-	)
-	-- Toggle custom icons
-	MCM.AddSetting(
-		mcmName,
-		"General",
-		{
-			Type = ModConfigMenu.OptionType.BOOLEAN,
-			CurrentSetting = function()
-				return HPBars.Config["ShowCustomIcons"]
-			end,
-			Display = function()
-				local onOff = "False"
-				if HPBars.Config["ShowCustomIcons"] then
-					onOff = "True"
-				end
-				return "Show custom Icons: " .. onOff
-			end,
-			OnChange = function(currentBool)
-				HPBars.Config["ShowCustomIcons"] = currentBool
-			end,
-			Info = { "Toggle if boss specific icons should be shown","Will display the vanilla icon otherwise"}
 		}
 	)
 	-- Toggle Notches
@@ -231,27 +188,6 @@ if MCMLoaded then
 			Info = {"Number of bars per row displayed"}
 		}
 	)
-	-- Enable Champion coloring
-	MCM.AddSetting(
-		mcmName,
-		"General",
-		{
-			Type = ModConfigMenu.OptionType.BOOLEAN,
-			CurrentSetting = function()
-				return HPBars.Config["UseChampionColors"]
-			end,
-			Display = function()
-				local onOff = "False"
-				if HPBars.Config["UseChampionColors"] then
-					onOff = "True"
-				end
-				return "Use Champion coloring: " .. onOff
-			end,
-			OnChange = function(currentBool)
-				HPBars.Config["UseChampionColors"] = currentBool
-			end,
-		}
-	)
 	-- Enable Flashing
 	MCM.AddSetting(
 		mcmName,
@@ -274,6 +210,29 @@ if MCMLoaded then
 			Info = {"Enables / disables flashing of the bar when hit or healed"}
 		}
 	)
+	-- Show with Spidermod
+	MCM.AddSetting(
+		mcmName,
+		"General",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["DisplayWithSpidermod"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["DisplayWithSpidermod"] then
+					onOff = "True"
+				end
+				return "Show with spidermod: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["DisplayWithSpidermod"] = currentBool
+			end,
+			Info = {"Enables / disables the bars, when the player has the spidermod item"}
+		}
+	)
+
 
 	-- Text Mode
 	local textModes = {"None", "Percent", "HPLeft"}
@@ -318,7 +277,80 @@ if MCMLoaded then
 		}
 	)
 
+	---------------------------------------------------------------------------
+	----------------------------------Icons------------------------------------
 
+	-- Toggle icons
+	MCM.AddSetting(
+		mcmName,
+		"Icons",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowIcons"]
+			end,
+			Display = function()
+                addDummyBar()
+				local onOff = "False"
+				if HPBars.Config["ShowIcons"] then
+					onOff = "True"
+				end
+				return "Show Icons: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowIcons"] = currentBool
+			end,
+		}
+	)
+
+	-- Toggle custom icons
+	MCM.AddSetting(
+		mcmName,
+		"Icons",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowCustomIcons"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowCustomIcons"] then
+					onOff = "True"
+				end
+				return "Show custom Icons: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowCustomIcons"] = currentBool
+			end,
+			Info = { "Toggle if boss specific icons should be shown","Will display the vanilla icon otherwise"}
+		}
+	)
+
+	-- Enable Champion coloring
+	MCM.AddSetting(
+		mcmName,
+		"Icons",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["UseChampionColors"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["UseChampionColors"] then
+					onOff = "True"
+				end
+				return "Use Champion coloring: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["UseChampionColors"] = currentBool
+			end,
+			Info = { "If enabled, applies the champion color of the boss to the boss bar icon"}
+		}
+	)
+
+	---------------------------------------------------------------------------
+	----------------------------------Bosses-----------------------------------
 
 	-- Enable Dark Esau
 	MCM.AddSetting(

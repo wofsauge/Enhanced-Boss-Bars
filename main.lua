@@ -502,11 +502,19 @@ function HPBars:getHPPercent(bossEntry)
 	return math.max(0, math.ceil((bossEntry.sumHP / bossEntry.sumMaxHP) * 100))
 end
 
+function HPBars:hasSpiderMod()
+	for i = 0, game:GetNumPlayers() - 1 do
+		if Isaac.GetPlayer(i):HasCollectible(CollectibleType.COLLECTIBLE_SPIDER_MOD) then
+			return true
+		end
+	end
+end
+
 function HPBars:onRender()
 	HPBars:handleBadLoad()
 	HPBars:updateRoomEntities()
 	local currentBossCount = #currentBossesSorted
-	if currentBossCount <= 0 then
+	if currentBossCount <= 0 or not HPBars.Config.DisplayWithSpidermod and HPBars:hasSpiderMod() then
 		return
 	end
 	local isVertical = HPBars:isVerticalLayout()

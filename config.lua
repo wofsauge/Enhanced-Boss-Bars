@@ -40,6 +40,9 @@ HPBars.UserConfig = {
     -- If the boss is a champion and this is enabled, the icon will be colored the same way as the boss 
     -- Default value: true
     ["UseChampionColors"] = true,
+    -- Disable bars when the player has the Spidermod item
+    -- Default value: true
+    ["DisplayWithSpidermod"] = true,
 
     ---------------------------------
     --------- Boss Specific ---------
@@ -90,14 +93,16 @@ HPBars.DefaultConfig = {
     ["BarStyle"] = "Default",
     ["Position"] = "Bottom",
     ["Sorting"] = "Segments",
-    ["ShowIcons"] = true,
-    ["ShowCustomIcons"] = true,
     ["EnableSpecificBossbars"] = true,
     ["ShowNotches"] = false,
     ["BarsPerRow"] = 7,    
     ["BarPadding"] = 15,
     ["ScreenPadding"] = 17,
     ["EnableFlashing"] = true,
+    ["DisplayWithSpidermod"] = true,
+
+    ["ShowIcons"] = true,
+    ["ShowCustomIcons"] = true,
     ["UseChampionColors"] = true,
 
     ["ShowDarkEsau"] = true,
