@@ -16,6 +16,9 @@ HPBars.UserConfig = {
     -- Allows some bosses to use their special boss bar designs
     -- Default value: true
     ["EnableSpecificBossbars"] = true,
+    -- Shows additional notches on the bar
+    -- Default value: false
+    ["ShowNotches"] = false,
     -- Defines how many bars should be displayed per row
     -- Default value: 7
     ["BarsPerRow"] = 7,
@@ -83,6 +86,7 @@ HPBars.DefaultConfig = {
     ["ShowIcons"] = true,
     ["ShowCustomIcons"] = true,
     ["EnableSpecificBossbars"] = true,
+    ["ShowNotches"] = false,
     ["BarsPerRow"] = 7,    
     ["BarPadding"] = 15,
     ["ScreenPadding"] = 17,

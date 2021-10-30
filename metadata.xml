@@ -17,7 +17,9 @@
 [h2]Known Issues[/h2]
 [b]Double bars / vanilla and modded bars visible[/b]
 This mod currently is incompatible with any other mod that alters the boss bar design in any way. This issue manifests itself that the vanilla boss hp bar is visible alongside the bars added by this mod.
-To fix this issue, deactivate all other mods that alter the boss bar design, then restart the game.
+It can also be caused by a first installation of the mod.
+
+To fix this issue, deactivate all other mods that alter the boss bar design and restart the game.
 
 [b]Incompatible mods[/b]
 [list]
@@ -37,8 +39,10 @@ Alternatively you can edit the config.lua file found in the mod files.
  [*] [b]serious max[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=1431781210]Boss Health bar background[/url]&quot; design
  [*] [b]TheSavageHybrid[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2515917831]Paper Healthbars[/url]&quot; design
  [*] [b]hippocrunchy[/b] for letting us use their &quot;[url=https://steamcommunity.com/sharedfiles/filedetails/?id=2530772508]Alt Horsemen (+War)[/url]&quot; mod as an example
-[/list]</description>
-    <version>1.7</version>
+[/list]
+
+[img]https://i.imgur.com/P6a8043.png[/img] [url=https://github.com/wofsauge/Enhanced-Boss-Bars]Any Problems or want to help? Visit this project on GitHub[/url]</description>
+    <version>1.8</version>
     <visibility>Public</visibility>
     <tag id="Lua"/>
     <tag id="Bosses"/>

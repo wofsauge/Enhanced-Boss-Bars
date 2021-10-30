@@ -117,6 +117,16 @@ function HPBars:applyBarStyle(tableEntry, barStyle)
 			tableEntry.barOverlaySprite:LoadGraphics()
 		end
 	end
+	if barStyle.notchAnm2 and barStyle.notchAnm2 ~= "NONE" then
+		tableEntry.notchSprite = Sprite()
+		tableEntry.notchSprite:Load(barStyle.notchAnm2, true)
+		if barStyle.notchSprite then
+			for i = 0, tableEntry.notchSprite:GetLayerCount() - 1 do
+				tableEntry.notchSprite:ReplaceSpritesheet(i, barStyle.notchSprite)
+			end
+			tableEntry.notchSprite:LoadGraphics()
+		end
+	end
 
 	local barSprite = isVertical and barStyle.verticalSprite or barStyle.sprite
 	if barStyle.sprite then
@@ -130,6 +140,9 @@ function HPBars:applyBarStyle(tableEntry, barStyle)
 	end
 	if barStyle.overlayAnimationType == "Animated" then
 		tableEntry.barOverlaySprite:Play(tableEntry.barOverlaySprite:GetDefaultAnimation(), true)
+	end
+	if barStyle.notchAnimationType == "Animated" then
+		tableEntry.notchSprite:Play(tableEntry.notchSprite:GetDefaultAnimation(), true)
 	end
 	tableEntry.barStyle = barStyle
 end
@@ -177,6 +190,9 @@ function HPBars:updateSprites(tableEntry)
 	if tableEntry.barOverlaySprite then
 		tableEntry.barOverlaySprite:Update()
 	end
+	if tableEntry.notchSprite then
+		tableEntry.notchSprite:Update()
+	end
 end
 
 function HPBars:evaluateEntityIgnore(entity)
@@ -219,6 +235,7 @@ function HPBars:createNewBossBar(entity)
 		barSprite = bossHPsprite,
 		barStyle = barStyle,
 		barOverlaySprite = nil,
+		notchSprite = nil,
 		lastHP = entity.HitPoints,
 		hitState = "",
 		lastStateChangeFrame = 0,
@@ -397,6 +414,30 @@ function HPBars:renderIcon(bossEntry, barPos, hpbarFill)
 	end
 end
 
+function HPBars:renderOverlays(bossEntry, barPos, hpbarFill, barSizePercent)
+	local rotation = HPBars:isVerticalLayout() and -90 or 0
+
+	if HPBars.Config.ShowNotches and bossEntry.notchSprite then
+		bossEntry.notchSprite.Rotation = rotation
+		if bossEntry.barStyle.notchAnimationType == "HP" then
+			bossEntry.notchSprite:SetFrame("overlay" .. barSizePercent, hpbarFill)
+		else
+			bossEntry.notchSprite:SetAnimation("overlay" .. barSizePercent, false)
+		end
+		bossEntry.notchSprite:Render(barPos, Vector.Zero, Vector.Zero)
+	end
+
+	if bossEntry.barOverlaySprite then
+		bossEntry.barOverlaySprite.Rotation = rotation
+		if bossEntry.barStyle.overlayAnimationType == "HP" then
+			bossEntry.barOverlaySprite:SetFrame("overlay" .. barSizePercent, hpbarFill)
+		else
+			bossEntry.barOverlaySprite:SetAnimation("overlay" .. barSizePercent, false)
+		end
+		bossEntry.barOverlaySprite:Render(barPos, Vector.Zero, Vector.Zero)
+	end
+end
+
 function HPBars:handleBadLoad()
 	if badload then
 		Isaac.RenderText("Enhanced Boss Bars detected a conflicting mod or first installation!", 40, 30, 1, 0.5, 0.5, 1)
@@ -467,15 +508,8 @@ function HPBars:onRender()
 				boss.barSprite:Render(barPos + Vector(barSize - 1 - progress, 0), Vector.Zero, Vector.Zero)
 			end
 			boss.barSprite.Color = Color(1, 1, 1, 1, 0, 0, 0)
-			if boss.barOverlaySprite then
-				boss.barOverlaySprite.Rotation = isVertical and -90 or 0
-				if boss.barStyle.overlayAnimationType == "HP" then
-					boss.barOverlaySprite:SetFrame("overlay" .. barSizePercent, hpbarFill)
-				else
-					boss.barOverlaySprite:SetAnimation("overlay" .. barSizePercent, false)
-				end
-				boss.barOverlaySprite:Render(barPos, Vector.Zero, Vector.Zero)
-			end
+
+			HPBars:renderOverlays(boss, barPos, hpbarFill, barSizePercent)
 
 			HPBars:renderIcon(boss, barPos, hpbarFill)
 

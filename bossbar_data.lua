@@ -240,11 +240,14 @@ HPBars.BarStyles = {
 		overlaySprite = nil,
 		overlayAnm2 = nil,
 		overlayAnimationType = "HP",
+		defaultIcon = path .. "boss.png",
 		verticalSprite = nil,
 		verticalAnm2 = nil,
 		verticalOverlaySprite = nil,
 		verticalOverlayAnm2 = nil,
-		defaultIcon = path .. "boss.png",
+		notchSprite = barPath .. "bossbar_notches.png",
+		notchAnm2 = barPath .. "default_overlay.anm2", -- set to NONE, if notches should not be visible
+		notchAnimationType = "HP",
 		idleColoring = HPBars.BarColorings.vanillaDefault,
 		hitColoring = HPBars.BarColorings.vanillaHit,
 		healColoring = HPBars.BarColorings.vanillaHeal,
@@ -310,6 +313,7 @@ HPBars.BarStyles = {
 	["Ultra Greed"] = {
 		sprite = barPath .. "bosses/bossbar_ultra_greed.png",
 		idleColoring = HPBars.BarColorings.none,
+		notchAnm2 = "NONE",
 		tooltip = "'Ultra Greed' - Boss themed"
 	},
 	["Ultra Greedier"] = {
@@ -326,11 +330,13 @@ HPBars.BarStyles = {
 	["Copper"] = {
 		sprite = barPath .. "bossbar_design_copper.png",
 		idleColoring = HPBars.BarColorings.none,
+		notchAnm2 = "NONE",
 		tooltip = "Styled to look like medival copper"
 	},
 	["Dots"] = {
 		sprite = barPath .. "bossbar_design_dots.png",
 		idleColoring = HPBars.BarColorings.none,
+		notchAnm2 = "NONE",
 		tooltip = "Styled to use cool dots"
 	},
 	["Enter the Gungeon"] = {
@@ -352,6 +358,7 @@ HPBars.BarStyles = {
 		sprite = barPath .. "bossbar_design_isaachearts.png",
 		verticalSprite = barPath .. "bossbar_design_isaacheartsvertical.png",
 		idleColoring = HPBars.BarColorings.none,
+		notchAnm2 = "NONE",
 		tooltip = "Styled to look like hearts"
 	},
 	["Lil' Portal"] = {
@@ -366,12 +373,14 @@ HPBars.BarStyles = {
 	},
 	["Minimal"] = {
 		sprite = barPath .. "bossbar_design_bw.png",
+		notchAnm2 = "NONE",
 		tooltip = "Styled to be minimal"
 	},
 	["Minecraft"] = {
 		sprite = barPath .. "bossbar_design_minecraft.png",
 		verticalSprite = barPath .. "bossbar_design_minecraftvertical.png",
 		idleColoring = HPBars.BarColorings.none,
+		notchAnm2 = "NONE",
 		tooltip = "Styled to look like Minecrafts UI"
 	},
 	["Playdough Cookie"] = {
@@ -392,11 +401,13 @@ HPBars.BarStyles = {
 	["Spin To Win"] = {
 		sprite = barPath .. "bossbar_design_spintowin.png",
 		idleColoring = HPBars.BarColorings.none,
+		notchAnm2 = "NONE",
 		tooltip = "Styled to resemble Spin To Win"
 	},
 	["Terraria"] = {
 		sprite = barPath .. "bossbar_design_terraria.png",
 		idleColoring = HPBars.BarColorings.none,
+		notchSprite = barPath .. "bossbar_notches_terraria.png",
 		hitColoring = Color(1, 1, 1, 1, 1, 0, 0, 0),
 		tooltip = "Styled like its in Terraria"
 	},
@@ -427,6 +438,7 @@ HPBars.BarStyles = {
 	},
 	["Design - TheSavageHybrid"] = {
 		sprite = barPath .. "bossbar_design4(TheSavageHybrid).png",
+		notchSprite = barPath .. "bossbar_notches_paper.png",
 		tooltip = "Boss bar mod by TheSavageHybrid"
 	}
 }

@@ -126,6 +126,28 @@ if MCMLoaded then
 			Info = { "Toggle if boss specific icons should be shown","Will display the vanilla icon otherwise"}
 		}
 	)
+	-- Toggle Notches
+	MCM.AddSetting(
+		mcmName,
+		"General",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowNotches"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowNotches"] then
+					onOff = "True"
+				end
+				return "Show notches: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowNotches"] = currentBool
+			end,
+			Info = { "Toggle the display of notches on the boss bars"}
+		}
+	)
 	-- Bar padding
 	MCM.AddSetting(
         mcmName,
