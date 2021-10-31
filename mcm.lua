@@ -46,7 +46,8 @@ if MCMLoaded then
     table.sort(availablePresets)
 	local presetTooltips = {
 		["Default"] = {"Recommended settings", "Enhances the gameplay and adds a lot of QoL features"},
-		["Vanilla"] = {"Vanilla experience", "Tries to emulate the exact behavior as it is in the main game"}
+		["Vanilla"] = {"Vanilla experience", "Tries to emulate the exact behavior as it is in the main game"},
+		["Antibirth"] = {"Antibirth experience", "Same as Vanilla, but the bar is on top of the screen"}
 	}
 
     MCM.AddSetting(
