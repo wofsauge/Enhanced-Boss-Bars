@@ -187,7 +187,8 @@ HPBars.BossIgnoreList = {
 	["951.101"] = true, -- Beast bg entity
 	["951.102"] = true, -- Beast bg entity
 	["951.103"] = true, -- Beast bg entity
-	["951.104"] = true -- Beast bg entity
+	["951.104"] = true, -- Beast bg entity
+	["964.0"] = true -- Dummy NPC
 }
 
 HPBars.BarColorings = {
