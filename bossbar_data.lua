@@ -141,9 +141,7 @@ HPBars.BossIgnoreList = {
 	["412.0"] = function(entity) -- delirium spawned stuff
 		return entity.Parent ~= nil
 	end,
-	["866.0"] = function(entity) -- Dark Esau
-		return not HPBars.Config.ShowDarkEsau
-	end,
+	["866.0"] = true, -- Dark Esau
 	["867.0"] = true, -- Mothers shadow (knife piece 2 escape)
 	["903.1"] = function(entity) -- The Mask
 		return string.find(entity:GetSprite():GetAnimation(), "Stun")

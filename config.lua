@@ -46,9 +46,6 @@ HPBars.UserConfig = {
 
     ---------------------------------
     --------- Boss Specific ---------
-    -- Shows the Hp bar for Dark Esau ghost
-    -- Default value: true
-    ["ShowDarkEsau"] = true,
     -- Shows the Hp bar for Beast and its companions
     -- Default value: true
     ["ShowInBeastFight"] = true,
@@ -106,7 +103,6 @@ HPBars.PresetConfigs.Default = {
     ["ShowCustomIcons"] = true,
     ["UseChampionColors"] = true,
 
-    ["ShowDarkEsau"] = true,
     ["ShowInBeastFight"] = true,
     ["ShowInMotherFight"] = true,
     ["ShowMegaSatan"] = true,
@@ -131,7 +127,6 @@ HPBars.PresetConfigs.Vanilla = {
     ["ShowCustomIcons"] = false,
     ["UseChampionColors"] = false,
 
-    ["ShowDarkEsau"] = false,
     ["ShowInBeastFight"] = false,
     ["ShowInMotherFight"] = false,
     ["ShowMegaSatan"] = false,
@@ -155,7 +150,6 @@ HPBars.PresetConfigs.Antibirth = {
     ["ShowCustomIcons"] = false,
     ["UseChampionColors"] = false,
 
-    ["ShowDarkEsau"] = false,
     ["ShowInBeastFight"] = false,
     ["ShowInMotherFight"] = false,
     ["ShowMegaSatan"] = false,

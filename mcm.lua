@@ -406,28 +406,6 @@ if MCMLoaded then
 	---------------------------------------------------------------------------
 	----------------------------------Bosses-----------------------------------
 
-	-- Enable Dark Esau
-	MCM.AddSetting(
-		mcmName,
-		"Bosses",
-		{
-			Type = ModConfigMenu.OptionType.BOOLEAN,
-			CurrentSetting = function()
-				return HPBars.Config["ShowDarkEsau"]
-			end,
-			Display = function()
-				local onOff = "False"
-				if HPBars.Config["ShowDarkEsau"] then
-					onOff = "True"
-				end
-				return "Enable Dark Esau: " .. onOff
-			end,
-			OnChange = function(currentBool)
-				HPBars.Config["ShowDarkEsau"] = currentBool
-			end,
-			Info = {"Enables / disables the bar for Dark Esau"}
-		}
-	)
 	-- Enable Beast Fight
 	MCM.AddSetting(
 		mcmName,
