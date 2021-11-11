@@ -1,5 +1,5 @@
 HPBars = RegisterMod("Enhanced Boss bars", 1)
-HPBars.Version = 1.9
+HPBars.Version = 1.11
 HPBars.iconPath = "gfx/ui/bosshp_icons/"
 HPBars.barPath = "gfx/ui/bosshp_bars/"
 
@@ -490,11 +490,11 @@ end
 
 function HPBars:handleBadLoad()
 	if badload then
-		Isaac.RenderText("Enhanced Boss Bars detected a conflicting mod or first installation!", 40, 30, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("Please deactivate all other mods that alter the Boss bar sprites and", 40, 40, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("Restart your game!", 40, 50, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("(This tends to happen when the mod is first installed, a conflicting", 40, 70, 1, 0.5, 0.5, 1)
-		Isaac.RenderText("mod is enabled, or when the mod is re-enabled via the mod menu)", 40, 80, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("Enhanced Boss Bars could not load correctly!", 40, 40, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("This is caused either by changing the games language,", 40, 52, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("a conflicting mod or the first installation of this mod.", 40, 64, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("Please deactivate all other mods that alter the Boss bar sprites", 40, 76, 1, 0.5, 0.5, 1)
+		Isaac.RenderText("and Restart your game!", 40, 88, 1, 0.5, 0.5, 1)
 	end
 end
 
