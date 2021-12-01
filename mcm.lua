@@ -264,6 +264,28 @@ if MCMLoaded then
 			Info = {"Enables / disables flashing of the bar when hit or healed"}
 		}
 	)
+	-- Enable Invincibility coloring
+	MCM.AddSetting(
+		mcmName,
+		"General",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["EnableInvicibilityIndication"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["EnableInvicibilityIndication"] then
+					onOff = "True"
+				end
+				return "Enable Invincibility coloring: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["EnableInvicibilityIndication"] = currentBool
+			end,
+			Info = {"Enables / disables white coloring of the bar when boss is invincible"}
+		}
+	)
 	-- Show with Spidermod
 	MCM.AddSetting(
 		mcmName,

@@ -37,6 +37,9 @@ HPBars.UserConfig = {
     -- Enables the flashing of the bars, when the enemy gets hit or heals itself
     -- Default value: true
     ["EnableFlashing"] = true,
+    -- Enables a white coloring of the bars, when the enemy is invincible
+    -- Default value: true
+    ["EnableInvicibilityIndication"] = true,
     -- If the boss is a champion and this is enabled, the icon will be colored the same way as the boss 
     -- Default value: true
     ["UseChampionColors"] = true,
@@ -101,6 +104,7 @@ HPBars.PresetConfigs.Default = {
     ["BarPadding"] = 15,
     ["ScreenPadding"] = 17,
     ["EnableFlashing"] = true,
+    ["EnableInvicibilityIndication"] = true,
     ["DisplayWithSpidermod"] = true,
 
     ["ShowIcons"] = true,
@@ -126,6 +130,7 @@ HPBars.PresetConfigs.Vanilla = {
     ["BarPadding"] = 15,
     ["ScreenPadding"] = 17,
     ["EnableFlashing"] = true,
+    ["EnableInvicibilityIndication"] = false,
     ["DisplayWithSpidermod"] = true,
 
     ["ShowIcons"] = true,
@@ -150,6 +155,7 @@ HPBars.PresetConfigs.Antibirth = {
     ["BarPadding"] = 15,
     ["ScreenPadding"] = 17,
     ["EnableFlashing"] = true,
+    ["EnableInvicibilityIndication"] = false,
     ["DisplayWithSpidermod"] = true,
 
     ["ShowIcons"] = true,

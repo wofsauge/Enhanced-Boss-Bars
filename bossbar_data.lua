@@ -208,7 +208,7 @@ HPBars.ColoringFunctions = {
 				bossEntry.barSprite.Color = bossEntry.barStyle.hitColoring
 			end
 		else
-			if HPBars:isInvincible(bossEntry) then
+			if HPBars.Config.EnableInvicibilityIndication and HPBars:isInvincible(bossEntry) then
 				bossEntry.barSprite.Color = bossEntry.barStyle.invincibleColoring
 			else
 				bossEntry.barSprite.Color = bossEntry.barStyle.idleColoring
@@ -224,7 +224,7 @@ HPBars.ColoringFunctions = {
 				bossEntry.barSprite.Color = bossEntry.barStyle.hitColoring
 			end
 		else
-			if HPBars:isInvincible(bossEntry) then
+			if HPBars.Config.EnableInvicibilityIndication and HPBars:isInvincible(bossEntry) then
 				bossEntry.barSprite.Color = bossEntry.barStyle.invincibleColoring
 			else
 				local hpbarFill = math.ceil((bossEntry.hp / bossEntry.maxHP) * 100)
