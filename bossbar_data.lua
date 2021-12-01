@@ -155,6 +155,9 @@ HPBars.BossIgnoreList = {
 		return entity.Parent ~= nil or entity:GetSprite():GetAnimation() == "Transition" or
 			not HPBars.Config.ShowInMotherFight
 	end,
+	["912.10"] = function(entity) -- Mother phase 2
+		return not HPBars.Config.ShowInMotherFight
+	end,
 	["912.30"] = true, -- Mother snake attacks
 	["912.100"] = true, -- Mother ball attacks
 	["918.0"] = function(entity) -- Turdlet (Sub Segments)
