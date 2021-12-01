@@ -230,7 +230,7 @@ function HPBars:createNewBossBar(entity)
 	local entityNPC = entity:ToNPC()
 	local championColor =
 		entityNPC and HPBars.Config.UseChampionColors and
-		(entityNPC:GetChampionColorIdx() >= 0 or entityNPC:GetBossColorIdx()) and
+		(entityNPC:GetChampionColorIdx() >= 0 or entityNPC:GetBossColorIdx() >= 0) and
 		HPBars:copyColor(entity:GetColor()) or
 		nil
 
