@@ -157,7 +157,7 @@ HPBars.PresetConfigs.Antibirth = {
     ["UseChampionColors"] = false,
 
     ["ShowInBeastFight"] = false,
-    ["ShowInMotherFight"] = false,
+    ["ShowInMotherFight"] = true,
     ["ShowMegaSatan"] = false,
     
     ["InfoText"] = "None",
