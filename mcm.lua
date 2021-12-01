@@ -331,6 +331,28 @@ if MCMLoaded then
 		}
 	)
 
+	-- Text Size
+	local textScales = {0.5, 0.75, 1, 1.25, 1.5, 2}
+	MCM.AddSetting(
+        mcmName,
+        "General",
+		{
+			Type = ModConfigMenu.OptionType.NUMBER,
+			CurrentSetting = function()
+				return AnIndexOf(textScales, HPBars.Config["TextSize"])
+			end,
+			Minimum = 1,
+			Maximum = 6,
+			Display = function()
+				return "Text Size: " .. HPBars.Config["TextSize"]
+			end,
+			OnChange = function(currentNum)
+				HPBars.Config["TextSize"] = textScales[currentNum]
+			end,
+			Info = {"Changes the size of the info text"}
+		}
+	)
+
 	---------------------------------------------------------------------------
 	----------------------------------Icons------------------------------------
 

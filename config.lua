@@ -66,6 +66,10 @@ HPBars.UserConfig = {
     -- Possible Values between 0 and 1
     -- Default value: 1
     ["TextTransparency"] = 1,
+    -- Changes the size of the info text
+    -- Possible Values between 0 and 1
+    -- Default value: 0.5
+    ["TextSize"] = 0.5,
 }
 
 
@@ -109,6 +113,7 @@ HPBars.PresetConfigs.Default = {
     
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
+    ["TextSize"] = 0.5,
 }
 
 HPBars.PresetConfigs.Vanilla = {
@@ -133,6 +138,7 @@ HPBars.PresetConfigs.Vanilla = {
     
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
+    ["TextSize"] = 0.5,
 }
 HPBars.PresetConfigs.Antibirth = {
     ["BarStyle"] = "Default",
@@ -156,4 +162,5 @@ HPBars.PresetConfigs.Antibirth = {
     
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
+    ["TextSize"] = 0.5,
 }

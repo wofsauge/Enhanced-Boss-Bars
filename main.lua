@@ -439,10 +439,11 @@ function HPBars:renderInfoText(bossEntry, barPos, barSize)
 	end
 	local textSize = Isaac.GetTextWidth(text)
 	local transparency = HPBars.Config.TextTransparency
+	local textScale = HPBars.Config.TextSize
 	if HPBars:isVerticalLayout() then
-		Isaac.RenderScaledText(text, barPos.X - textSize / 4, barPos.Y - barSize / 2, 0.5, 0.5, 1, 1, 1, transparency)
+		Isaac.RenderScaledText(text, barPos.X - (textSize / 2) * textScale, barPos.Y - barSize / 2 - 6 * textScale, textScale, textScale, 1, 1, 1, transparency)
 	else
-		Isaac.RenderScaledText(text, barPos.X + barSize / 2 - textSize / 2, barPos.Y - 3, 0.5, 0.5, 1, 1, 1, transparency)
+		Isaac.RenderScaledText(text, barPos.X + barSize / 2 - (textSize / 2) * textScale, barPos.Y - 6 * textScale, textScale, textScale, 1, 1, 1, transparency)
 	end
 end
 
