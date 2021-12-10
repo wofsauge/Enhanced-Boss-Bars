@@ -527,8 +527,8 @@ HPBars.BossDefinitions = {
 	["28.0"] = {sprite = path .. "chapter2/chub.png", offset = Vector(-4, 0)},
 	["28.1"] = {sprite = path .. "chapter2/chad.png", offset = Vector(-4, 0)},
 	["28.2"] = {sprite = path .. "chapter2/carrion_queen.png", offset = Vector(-4, 0)},
-	["36.0"] = {sprite = path .. "chapter2/gurdy.png", offset = Vector(-9, -3)},
-	["38.2"] = {sprite = path .. "minibosses/ultra_pride_florian.png", offset = Vector(-5, 0)},
+	["36.0"] = {sprite = path .. "chapter2/gurdy.png", offset = Vector(-6, -1)},
+	["38.2"] = {sprite = path .. "minibosses/ultra_pride_florian.png", offset = Vector(-4, 0)},
 	["43.0"] = {sprite = path .. "chapter3/monstro_two.png", offset = Vector(-4, 0)},
 	["43.1"] = {sprite = path .. "chapter3/gish.png", offset = Vector(-5, 0)},
 	["45.10"] = {
@@ -542,10 +542,10 @@ HPBars.BossDefinitions = {
 	},
 	["46.0"] = {sprite = path .. "minibosses/sloth.png", offset = Vector(-6, 0)},
 	["46.1"] = {sprite = path .. "minibosses/super_sloth.png", offset = Vector(-8, 0)},
-	["46.2"] = {sprite = path .. "minibosses/ultra_pride_ed.png", offset = Vector(-6, 0)},
+	["46.2"] = {sprite = path .. "minibosses/ultra_pride_ed.png", offset = Vector(-5, 0)},
 	["47.0"] = {sprite = path .. "minibosses/lust.png", offset = Vector(-6, 0)},
 	["47.1"] = {sprite = path .. "minibosses/super_lust.png", offset = Vector(-8, 0)},
-	["48.0"] = {sprite = path .. "minibosses/wrath.png", offset = Vector(-6, 0)},
+	["48.0"] = {sprite = path .. "minibosses/wrath.png", offset = Vector(-5, 0)},
 	["48.1"] = {sprite = path .. "minibosses/super_wrath.png", offset = Vector(-8, 0)},
 	["49.0"] = {sprite = path .. "minibosses/gluttony.png", offset = Vector(-6, 0)},
 	["49.1"] = {sprite = path .. "minibosses/super_gluttony.png", offset = Vector(-8, 0)},
@@ -607,9 +607,9 @@ HPBars.BossDefinitions = {
 			{"isI1Equal", path .. "chapter2/peep_one_eye.png", {1}},
 			{"isI1Equal", path .. "chapter2/peep_no_eyes.png", {2}}
 		},
-		offset = Vector(-5, 0)
+		offset = Vector(-4, 0)
 	},
-	["68.1"] = {sprite = path .. "chapter3/the_bloat.png", offset = Vector(-6, 0)},
+	["68.1"] = {sprite = path .. "chapter3/the_bloat.png", offset = Vector(-4, 0)},
 	["69.0"] = {sprite = path .. "chapter3/loki.png", offset = Vector(-4, 0)},
 	["69.1"] = {
 		sprite = path .. "chapter4/lokii.png",
@@ -647,12 +647,12 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-3, 0)
 	},
-	["81.0"] = {sprite = path .. "chapter1/the_fallen.png", offset = Vector(-6, 2)},
+	["81.0"] = {sprite = path .. "chapter1/the_fallen.png", offset = Vector(-7, 2)},
 	["81.1"] = {sprite = path .. "minibosses/krampus.png", offset = Vector(-6, 0)},
 	["82.0"] = {sprite = path .. "horsemen/headless_horseman_body.png", offset = Vector(-2, 0)},
 	["83.0"] = {sprite = path .. "horsemen/headless_horsemen_head.png", offset = Vector(-7, 0)},
-	["84.0"] = {sprite = path .. "final/satan.png", offset = Vector(-5, -2)},
-	["84.10"] = {sprite = path .. "final/satan_phase2.png", offset = Vector(-2, 0)},
+	["84.0"] = {sprite = path .. "final/satan.png", offset = Vector(-9, 0)},
+	["84.10"] = {sprite = path .. "final/satan_phase2.png", offset = Vector(-1, 0)},
 	["97.0"] = {
 		sprite = path .. "chapter3/mask_of_infamy.png",
 		conditionalSprites = {
@@ -706,7 +706,7 @@ HPBars.BossDefinitions = {
 	["263.0"] = {sprite = path .. "chapter3/the_gate.png", offset = Vector(-6, 0)},
 	["264.0"] = {sprite = path .. "chapter2/mega_fatty.png", offset = Vector(-7, 0)},
 	["265.0"] = {sprite = path .. "chapter3/the_cage.png", offset = Vector(-7, 0)},
-	["266.0"] = {sprite = path .. "chapter4/mama_gurdy.png", offset = Vector(-8, 0)},
+	["266.0"] = {sprite = path .. "chapter4/mama_gurdy.png", offset = Vector(-7, 0)},
 	["267.0"] = {sprite = path .. "chapter2/dark_one.png", offset = Vector(-5, -2)},
 	["268.0"] = {sprite = path .. "chapter3/the_adversary.png", offset = Vector(-5, -2)},
 	["269.0"] = {sprite = path .. "chapter2/polycephalus.png", offset = Vector(-10, 0)},
@@ -826,7 +826,7 @@ HPBars.BossDefinitions = {
 	["910.2"] = {sprite = path .. "altpath/chimera_head.png", offset = Vector(-6, 0)},
 	["911.0"] = {sprite = path .. "altpath/rotgut_mouth.png", offset = Vector(-9, 0)},
 	["911.1"] = {sprite = path .. "altpath/rotgut_maggot.png", offset = Vector(-5, 2)},
-	["911.2"] = {sprite = path .. "altpath/rotgut_balls.png", offset = Vector(-5, 0)},
+	["911.2"] = {sprite = path .. "altpath/rotgut_balls.png", offset = Vector(-4, 0)},
 	["912.0"] = {
 		sprite = path .. "final/mother.png",
 		barStyle = "Mother",
@@ -879,7 +879,7 @@ HPBars.BossDefinitions = {
 	["951.0"] = {
 		sprite = path .. "final/beast.png",
 		barStyle = "Beast",
-		offset = Vector(-9, 0)
+		offset = Vector(-11, 0)
 	},
 	["951.10"] = {sprite = path .. "final/ultra_famine.png", offset = Vector(-10, 0)},
 	["951.20"] = {
