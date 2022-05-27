@@ -66,6 +66,16 @@ end
 
 ---------------------------------------------------------------------------
 -------------------------------Main Logic----------------------------------
+function HPBars:getIconSprite(bossDefinition, tableEntry)
+	local iconSuffix = ""
+	if tableEntry.bossColorIDx >= 0 and bossDefinition.bossColors then
+		iconSuffix = bossDefinition.bossColors[tableEntry.bossColorIDx+1] or ""
+	end
+	
+	local iconFile = HPBars:evaluateConditionals(bossDefinition, tableEntry) or bossDefinition.sprite or barStyle.defaultIcon
+	return string.gsub(iconFile, ".png", iconSuffix..".png")
+end
+
 function HPBars:evaluateConditionals(bossDefinition, tableEntry)
 	if not bossDefinition.conditionalSprites then
 		return nil
@@ -190,9 +200,8 @@ function HPBars:updateSprites(bossEntry)
 	barStyle = HPBars:getBarStyle(newStyle)
 	HPBars:setBarStyle(bossEntry, barStyle)
 
-	local iconToLoad =
-		HPBars:evaluateConditionals(bossDefinition, bossEntry) or bossDefinition.sprite or barStyle.defaultIcon
-
+	local iconToLoad = HPBars:getIconSprite(bossDefinition, bossEntry)
+	
 	HPBars:setIcon(bossEntry, iconToLoad, bossDefinition)
 	bossEntry.iconSprite:Update()
 	bossEntry.barSprite:Update()
@@ -239,6 +248,7 @@ function HPBars:createNewBossBar(entity)
 		hp = entity.HitPoints or 0,
 		maxHP = entity.MaxHitPoints or 0,
 		entityColor = championColor,
+		bossColorIDx = entityNPC and entityNPC:GetBossColorIdx() or -1,
 		iconSprite = icon,
 		iconOffset = Vector(-4, 0),
 		iconAnimationType = "HP",
@@ -383,6 +393,11 @@ function HPBars:updateRoomEntities()
 		if not visitedBosses[k] then
 			table.insert(currentBossesSorted, boss)
 		end
+	end
+	-- invert sorted table
+	local len = #currentBossesSorted
+	for i = len - 1, 1, -1 do
+		currentBossesSorted[len] = table.remove(currentBossesSorted, i)
 	end
 end
 

@@ -467,6 +467,7 @@ HPBars.BossDefinitions = {
 				HP: 		DEFAULT. The given .anm2 file will render the animation frame based on the current boss HP in percent (0-99 Frames). This allows for custom animations based on the progress of damage you have dealt.
 				Animated: 	the provided .anm2 file will be played as a normal animation, allowing for custom animated icons
 		conditionalSprites = table containing subtables of conditional sprite objects, formatted as {ConditionFunction, SpritePath, optional table of args}. ConditionFunction can either be a function or the name of the macro condition from the HPBars.conditions table
+		bossColors = Table of possible boss color suffix. Example: {"orange","black"} --> BosscolorIDx 0 = orange, IDx: 1 = black
 		offset = offset of the icon sprite to the start of the bar, used to prevent overlapping of the last percents of the hp
 		barSyle = Specific bar-style the boss should use. Value can either be the Name of the entry from the HPBars.BarStyles table or a new table formated the same as an entry in the HPBars.BarStyles table
 	}
@@ -478,6 +479,7 @@ HPBars.BossDefinitions = {
 			{"isMiddleSegment", path .. "chapter1/larry jr_segment.png"},
 			{"isTailSegment", path .. "chapter1/larry jr_segment.png"}
 		},
+		bossColors={ "_green", "_blue", },
 		offset = Vector(-6, 0)
 	},
 	["19.1"] = {
@@ -486,6 +488,7 @@ HPBars.BossDefinitions = {
 			{"isMiddleSegment", path .. "chapter2/the_hollow_segment.png"},
 			{"isTailSegment", path .. "chapter2/the_hollow_segment.png"}
 		},
+		bossColors={ "_green", "_black", "_yellow", },
 		offset = Vector(-7, 0)
 	},
 	["19.2"] = {
@@ -523,13 +526,13 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-6, -2)
 	},
-	["20.0"] = {sprite = path .. "chapter1/monstro.png", ignoreInvincible = true, offset = Vector(-5, 0)},
-	["28.0"] = {sprite = path .. "chapter2/chub.png", offset = Vector(-4, 0)},
+	["20.0"] = {sprite = path .. "chapter1/monstro.png", bossColors={ "_red", "_grey", }, ignoreInvincible = true, offset = Vector(-5, 0)},
+	["28.0"] = {sprite = path .. "chapter2/chub.png",bossColors={ "_blue", "_orange", }, offset = Vector(-4, 0)},
 	["28.1"] = {sprite = path .. "chapter2/chad.png", offset = Vector(-4, 0)},
-	["28.2"] = {sprite = path .. "chapter2/carrion_queen.png", offset = Vector(-4, 0)},
-	["36.0"] = {sprite = path .. "chapter2/gurdy.png", offset = Vector(-6, -1)},
+	["28.2"] = {sprite = path .. "chapter2/carrion_queen.png",bossColors={ "_pink", }, offset = Vector(-4, 0)},
+	["36.0"] = {sprite = path .. "chapter2/gurdy.png",bossColors={ "_green", }, offset = Vector(-6, -1)},
 	["38.2"] = {sprite = path .. "minibosses/ultra_pride_florian.png", offset = Vector(-4, 0)},
-	["43.0"] = {sprite = path .. "chapter3/monstro_two.png", offset = Vector(-4, 0)},
+	["43.0"] = {sprite = path .. "chapter3/monstro_two.png",bossColors={ "_red", }, offset = Vector(-4, 0)},
 	["43.1"] = {sprite = path .. "chapter3/gish.png", offset = Vector(-5, 0)},
 	["45.10"] = {
 		sprite = path .. "final/mom.png",
@@ -538,6 +541,7 @@ HPBars.BossDefinitions = {
 			{"isStageType", path .. "final/mausoleum_mom.png", {StageType.STAGETYPE_REPENTANCE}},
 			{"isStageType", path .. "final/mausoleum_mom.png", {StageType.STAGETYPE_REPENTANCE_B}}
 		},
+		bossColors={ "_blue", "_red", },
 		offset = Vector(-9, 0)
 	},
 	["46.0"] = {sprite = path .. "minibosses/sloth.png", offset = Vector(-6, 0)},
@@ -561,13 +565,14 @@ HPBars.BossDefinitions = {
 	["51.21"] = {sprite = path .. "minibosses/super_envy_small.png", offset = Vector(-4, 0)},
 	["51.30"] = {sprite = path .. "minibosses/envy_small.png", offset = Vector(-2, 0)},
 	["51.31"] = {sprite = path .. "minibosses/super_envy_tiny.png", offset = Vector(-2, 0)},
-	["62.0"] = {sprite = path .. "chapter1/pin.png", offset = Vector(-5, 0)},
+	["62.0"] = {sprite = path .. "chapter1/pin.png", bossColors={ "_grey", }, offset = Vector(-5, 0)},
 	["62.1"] = {sprite = path .. "chapter4/scolex.png", offset = Vector(-5, 0)},
 	["62.2"] = {
 		sprite = path .. "chapter2/the_frail.png",
 		conditionalSprites = {
 			{"isI2Equal", path .. "chapter2/the_frail_phase2.png", {1}}
 		},
+		bossColors={ "_black", },
 		offset = Vector(-5, 0)
 	},
 	["62.3"] = {
@@ -579,37 +584,40 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-10, 0)
 	},
-	["63.0"] = {sprite = path .. "horsemen/famine.png", offset = Vector(-6, 0)},
+	["63.0"] = {sprite = path .. "horsemen/famine.png", bossColors={ "_blue", }, offset = Vector(-6, 0)},
 	["64.0"] = {
 		sprite = path .. "horsemen/pestilence.png",
 		conditionalSprites = {
 			{"isI1Equal", path .. "horsemen/pestilence_phase2.png", {1}}
 		},
+		bossColors={ "_grey", },
 		offset = Vector(-5, 0)
 	},
-	["65.0"] = {sprite = path .. "horsemen/war.png", offset = Vector(-5, 0)},
-	["65.10"] = {sprite = path .. "horsemen/war_phase2.png", offset = Vector(-5, 0)},
+	["65.0"] = {sprite = path .. "horsemen/war.png", bossColors={ "_grey", }, offset = Vector(-5, 0)},
+	["65.10"] = {sprite = path .. "horsemen/war_phase2.png", bossColors={ "_grey", }, offset = Vector(-5, 0)},
 	["65.1"] = {sprite = path .. "horsemen/conquest.png", offset = Vector(-7, 0)},
 	["66.0"] = {
 		sprite = path .. "horsemen/death.png",
 		conditionalSprites = {
 			{"isI1Equal", path .. "horsemen/death_horse.png", {1}}
 		},
+		bossColors={ "_black", },
 		offset = Vector(-6, 0)
 	},
-	["66.20"] = {sprite = path .. "horsemen/death_horse.png", offset = Vector(-2, 0)},
-	["66.30"] = {sprite = path .. "horsemen/death.png", offset = Vector(-5, 0)},
-	["67.0"] = {sprite = path .. "chapter1/duke_of_flies.png", offset = Vector(-6, 0)},
-	["67.1"] = {sprite = path .. "chapter2/the_husk.png", offset = Vector(-6, 0)},
+	["66.20"] = {sprite = path .. "horsemen/death_horse.png", bossColors={ "_black", }, offset = Vector(-2, 0)},
+	["66.30"] = {sprite = path .. "horsemen/death.png", bossColors={ "_black", }, offset = Vector(-5, 0)},
+	["67.0"] = {sprite = path .. "chapter1/duke_of_flies.png", bossColors={ "_green", "_orange", }, offset = Vector(-6, 0)},
+	["67.1"] = {sprite = path .. "chapter2/the_husk.png", bossColors={ "_black", "_red", }, offset = Vector(-6, 0)},
 	["68.0"] = {
 		sprite = path .. "chapter2/peep.png",
 		conditionalSprites = {
 			{"isI1Equal", path .. "chapter2/peep_one_eye.png", {1}},
 			{"isI1Equal", path .. "chapter2/peep_no_eyes.png", {2}}
 		},
+		bossColors={ "_yellow", "_cyan", },
 		offset = Vector(-4, 0)
 	},
-	["68.1"] = {sprite = path .. "chapter3/the_bloat.png", offset = Vector(-4, 0)},
+	["68.1"] = {sprite = path .. "chapter3/the_bloat.png", bossColors={ "_green", }, offset = Vector(-4, 0)},
 	["69.0"] = {sprite = path .. "chapter3/loki.png", offset = Vector(-4, 0)},
 	["69.1"] = {
 		sprite = path .. "chapter4/lokii.png",
@@ -618,25 +626,26 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-3, 0)
 	},
-	["71.0"] = {sprite = path .. "chapter2/fistula_large.png", offset = Vector(-7, 0)},
+	["71.0"] = {sprite = path .. "chapter2/fistula_large.png", bossColors={ "_grey", }, offset = Vector(-7, 0)},
 	["71.1"] = {sprite = path .. "chapter4/teratoma_large.png", offset = Vector(-6, 0)},
-	["72.0"] = {sprite = path .. "chapter2/fistula_medium.png", offset = Vector(-4, 0)},
+	["72.0"] = {sprite = path .. "chapter2/fistula_medium.png", bossColors={ "_grey", }, offset = Vector(-4, 0)},
 	["72.1"] = {sprite = path .. "chapter4/teratoma_medium.png", offset = Vector(-7, 0)},
 	["73.0"] = {sprite = path .. "chapter2/fistula_small.png", offset = Vector(-2, 0)},
-	["73.1"] = {sprite = path .. "chapter4/teratoma_small.png", offset = Vector(-3, 0)},
+	["73.1"] = {sprite = path .. "chapter4/teratoma_small.png", bossColors={ "_grey", }, offset = Vector(-3, 0)},
 	["74.0"] = {sprite = path .. "chapter4/blastocyst_large.png", offset = Vector(-7, 0)},
 	["75.0"] = {sprite = path .. "chapter4/blastocyst_medium.png", offset = Vector(-4, 0)},
 	["76.0"] = {sprite = path .. "chapter4/blastocyst_small.png", offset = Vector(-3, 0)},
 	["78.0"] = {sprite = path .. "final/moms_heart.png", offset = Vector(-6, 0)},
 	["78.1"] = {sprite = path .. "final/it_lives.png", offset = Vector(-8, 0)},
-	["79.0"] = {sprite = path .. "chapter1/gemini_contusion.png", offset = Vector(-6, 0)},
+	["79.0"] = {sprite = path .. "chapter1/gemini_contusion.png", bossColors={ "_green", "_blue", }, offset = Vector(-6, 0)},
 	["79.1"] = {sprite = path .. "chapter1/steven_big.png", barStyle = "Steven", offset = Vector(-5, 0)},
 	["79.2"] = {sprite = path .. "chapter1/blighted_ovum.png", offset = Vector(-4, 0)},
 	["79.10"] = {
 		sprite = path .. "chapter1/gemini_suture.png",
 		conditionalSprites = {
 			{"animationNameEndsWith", path .. "chapter1/gemini_suture_angry.png", {"02"}}
-		},
+		}, 
+		bossColors={ "_green", "_blue", },
 		offset = Vector(-5, 0)
 	},
 	["79.11"] = {
@@ -660,9 +669,9 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-4, 2)
 	},
-	["98.0"] = {sprite = path .. "chapter3/heart_of_infamy.png", offset = Vector(-2, 0)},
-	["99.0"] = {sprite = path .. "chapter2/gurdy_jr.png", offset = Vector(-5, 0)},
-	["100.0"] = {sprite = path .. "chapter1/widow.png", offset = Vector(-6, 0)},
+	["98.0"] = {sprite = path .. "chapter3/heart_of_infamy.png", bossColors={ "_black", }, offset = Vector(-2, 0)},
+	["99.0"] = {sprite = path .. "chapter2/gurdy_jr.png", bossColors={ "_blue", "_yellow", }, offset = Vector(-5, 0)},
+	["100.0"] = {sprite = path .. "chapter1/widow.png", bossColors={ "_black", "_pink", }, offset = Vector(-6, 0)},
 	["100.1"] = {sprite = path .. "chapter2/the_wretched.png", offset = Vector(-6, 0)},
 	["101.0"] = {sprite = path .. "chapter4/daddy_long_legs.png", offset = Vector(-6, 0)},
 	["101.1"] = {sprite = path .. "chapter4/triachnid.png", offset = Vector(-6, 0)},
@@ -691,25 +700,26 @@ HPBars.BossDefinitions = {
 		barStyle = "Hush",
 		offset = Vector(-4, 0)
 	},
-	["237.1"] = {sprite = path .. "chapter1/gurgling.png", offset = Vector(-7, 0)},
+	["237.1"] = {sprite = path .. "chapter1/gurgling.png", bossColors={ "_yellow", "_black", }, offset = Vector(-7, 0)},
 	["237.2"] = {sprite = path .. "chapter1/turdling.png", offset = Vector(-8, 0)},
 	["260.0"] = {
 		sprite = path .. "chapter1/the_haunt.png",
 		conditionalSprites = {
 			{"isI1Equal", path .. "chapter1/the_haunt_phase2.png", {0}}
 		},
+		bossColors={ "_black", "_pink", },
 		offset = Vector(-5, 0)
 	},
-	["261.0"] = {sprite = path .. "chapter1/dingle.png", offset = Vector(-5, 0)},
+	["261.0"] = {sprite = path .. "chapter1/dingle.png", bossColors={ "_red", "_black", }, offset = Vector(-5, 0)},
 	["261.1"] = {sprite = path .. "chapter1/dangle.png", offset = Vector(-7, 0)},
-	["262.0"] = {sprite = path .. "chapter2/mega_maw.png", offset = Vector(-5, 0)},
-	["263.0"] = {sprite = path .. "chapter3/the_gate.png", offset = Vector(-6, 0)},
-	["264.0"] = {sprite = path .. "chapter2/mega_fatty.png", offset = Vector(-7, 0)},
-	["265.0"] = {sprite = path .. "chapter3/the_cage.png", offset = Vector(-7, 0)},
+	["262.0"] = {sprite = path .. "chapter2/mega_maw.png", bossColors={ "_red", "_black", }, offset = Vector(-5, 0)},
+	["263.0"] = {sprite = path .. "chapter3/the_gate.png", bossColors={ "_red", "_black", }, offset = Vector(-6, 0)},
+	["264.0"] = {sprite = path .. "chapter2/mega_fatty.png", bossColors={ "_red", "_brown", }, offset = Vector(-7, 0)},
+	["265.0"] = {sprite = path .. "chapter3/the_cage.png", bossColors={ "_green", "_pink", }, offset = Vector(-7, 0)},
 	["266.0"] = {sprite = path .. "chapter4/mama_gurdy.png", offset = Vector(-7, 0)},
 	["267.0"] = {sprite = path .. "chapter2/dark_one.png", offset = Vector(-5, -2)},
 	["268.0"] = {sprite = path .. "chapter3/the_adversary.png", offset = Vector(-5, -2)},
-	["269.0"] = {sprite = path .. "chapter2/polycephalus.png", offset = Vector(-10, 0)},
+	["269.0"] = {sprite = path .. "chapter2/polycephalus.png", bossColors={ "_red", "_pink", }, offset = Vector(-10, 0)},
 	["269.1"] = {sprite = path .. "chapter3/the_pile.png", offset = Vector(-10, 0)},
 	["270.0"] = {sprite = path .. "chapter4/mr_fred.png", offset = Vector(-6, 0)},
 	["271.0"] = {sprite = path .. "minibosses/uriel.png", offset = Vector(-5, 0)},
@@ -740,11 +750,11 @@ HPBars.BossDefinitions = {
 		barStyle = "Mega Satan Phase 2",
 		offset = Vector(-9, -3)
 	},
-	["401.0"] = {sprite = path .. "chapter2/the_stain.png", offset = Vector(-10, 0)},
-	["402.0"] = {sprite = path .. "chapter3/brownie.png", offset = Vector(-8, 0)},
-	["403.0"] = {sprite = path .. "chapter2/the_forsaken.png", offset = Vector(-6, 0)},
-	["404.0"] = {sprite = path .. "chapter1/little_horn.png", offset = Vector(-5, 0)},
-	["405.0"] = {sprite = path .. "chapter1/ragman.png", offset = Vector(-5, 0)},
+	["401.0"] = {sprite = path .. "chapter2/the_stain.png", bossColors={ "_grey", }, offset = Vector(-10, 0)},
+	["402.0"] = {sprite = path .. "chapter3/brownie.png", bossColors={ "_black", }, offset = Vector(-8, 0)},
+	["403.0"] = {sprite = path .. "chapter2/the_forsaken.png", bossColors={ "_black", }, offset = Vector(-6, 0)},
+	["404.0"] = {sprite = path .. "chapter1/little_horn.png", offset = Vector(-5, 0), bossColors={ "_orange", "_black", },},
+	["405.0"] = {sprite = path .. "chapter1/ragman.png", bossColors={ "_red", "_black", }, offset = Vector(-5, 0)},
 	["406.0"] = {
 		sprite = path .. "final/ultra_greed.png",
 		barStyle = "Ultra Greed",
