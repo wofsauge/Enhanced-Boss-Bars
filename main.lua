@@ -1,5 +1,5 @@
 HPBars = RegisterMod("Enhanced Boss bars", 1)
-HPBars.Version = 1.14
+HPBars.Version = 1.17
 HPBars.iconPath = "gfx/ui/bosshp_icons/"
 HPBars.barPath = "gfx/ui/bosshp_bars/"
 
