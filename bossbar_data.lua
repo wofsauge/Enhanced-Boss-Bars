@@ -666,7 +666,8 @@ HPBars.BossDefinitions = {
 		sprite = path .. "chapter3/mask_of_infamy.png",
 		conditionalSprites = {
 			{"animationNameStartsWith", path .. "chapter3/mask_of_infamy_phase2.png", {"Angry"}}
-		},
+		}, 
+		bossColors={ "_black", },
 		offset = Vector(-4, 2)
 	},
 	["98.0"] = {sprite = path .. "chapter3/heart_of_infamy.png", bossColors={ "_black", }, offset = Vector(-2, 0)},
