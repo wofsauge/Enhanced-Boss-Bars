@@ -133,7 +133,11 @@ function HPBars:setIcon(bossEntry, iconToLoad, bossDefinition)
 		end
 
 		if bossEntry.entityColor then
-			bossEntry.iconSprite.Color = bossEntry.entityColor
+			local newColor = bossEntry.entityColor
+			if newColor.R ~= 0.5 and newColor.G ~= 0.5 and newColor.B ~= 0.5 and newColor.RO >= 0.5 and newColor.RO < 0.9 then
+				-- only apply if color is not the Hit coloring
+				bossEntry.iconSprite.Color = newColor
+			end
 		end
 		bossEntry.ignoreInvincible = bossDefinition.ignoreInvincible
 		bossEntry.currentIcon = iconToLoad
