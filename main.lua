@@ -66,7 +66,7 @@ end
 
 ---------------------------------------------------------------------------
 -------------------------------Main Logic----------------------------------
-function HPBars:getIconSprite(bossDefinition, tableEntry)
+function HPBars:getIconSprite(bossDefinition, tableEntry, barStyle)
 	local iconSuffix = ""
 	if tableEntry.bossColorIDx >= 0 and bossDefinition.bossColors then
 		iconSuffix = bossDefinition.bossColors[tableEntry.bossColorIDx+1] or ""
@@ -194,19 +194,24 @@ function HPBars:applyBarStyle(bossEntry, barStyle)
 	bossEntry.barStyle = barStyle
 end
 
-function HPBars:updateSprites(bossEntry)
-	local bossDefinition = HPBars.BossDefinitions[bossEntry.entity.Type .. "." .. bossEntry.entity.Variant]
+function HPBars:getBossDefinition(bossEntity)
+	local bossDefinition = HPBars.BossDefinitions[bossEntity.Type .. "." .. bossEntity.Variant]
 	if bossDefinition == nil then
 		bossDefinition = HPBars.BossDefinitions["UNDEFINED"]
 	end
+	return bossDefinition
+end
 
+function HPBars:updateSprites(bossEntry)
+	local bossDefinition = HPBars:getBossDefinition(bossEntry.entity)
 	local newStyle = HPBars.Config.EnableSpecificBossbars and bossDefinition.barStyle or bossEntry.barStyle
-	barStyle = HPBars:getBarStyle(newStyle)
+	local barStyle = HPBars:getBarStyle(newStyle)
 	HPBars:setBarStyle(bossEntry, barStyle)
 
-	local iconToLoad = HPBars:getIconSprite(bossDefinition, bossEntry)
+	local iconToLoad = HPBars:getIconSprite(bossDefinition, bossEntry, barStyle)
 	
 	HPBars:setIcon(bossEntry, iconToLoad, bossDefinition)
+	bossEntry.sorting = bossDefinition.sorting
 	bossEntry.iconSprite:Update()
 	bossEntry.barSprite:Update()
 	if bossEntry.barOverlaySprite then
@@ -286,7 +291,7 @@ function HPBars:updateRoomEntities()
 	if lastUpdate == game:GetFrameCount() then
 		return
 	end
-	for i, entity in ipairs(Isaac.GetRoomEntities()) do
+	for _, entity in ipairs(Isaac.GetRoomEntities()) do
 		local entityHash = GetPtrHash(entity)
 		local bossEntry = HPBars.currentBosses[entityHash]
 		if entity:IsBoss() and not HPBars:evaluateEntityIgnore(entity) or bossEntry then
@@ -340,7 +345,7 @@ function HPBars:updateRoomEntities()
 		mainBoss.sumHP = 0
 		mainBoss.entityColor = HPBars.BarColorings.none
 		if #sortedBosses > 1 then
-			barStyle = HPBars:getBarStyle(HPBars.Config["BarStyle"])
+			local barStyle = HPBars:getBarStyle(HPBars.Config["BarStyle"])
 			HPBars:setBarStyle(mainBoss, barStyle)
 			HPBars:setIcon(mainBoss, barStyle.defaultIcon, {})
 		end
@@ -359,7 +364,7 @@ function HPBars:updateRoomEntities()
 	end
 
 	local visitedBosses = {}
-	for i, boss in ipairs(sortedBosses) do
+	for _, boss in ipairs(sortedBosses) do
 		local bossPtr = GetPtrHash(boss.entity)
 		boss.sumMaxHP = boss.maxHP
 		boss.sumHP = boss.hp
@@ -374,7 +379,8 @@ function HPBars:updateRoomEntities()
 				local childEntry = HPBars.currentBosses[childPtr]
 				if childEntry and not visitedBosses[childPtr] then
 					visitedBosses[childPtr] = true
-					if HPBars.Config.Sorting == "Segments" then
+					local bossDef = HPBars:getBossDefinition(boss.entity)
+					if HPBars.Config.Sorting == "Segments" or bossDef.forceSegmentation then
 						table.insert(currentBossesSorted, childEntry)
 					else
 						boss.sumMaxHP = boss.sumMaxHP + childEntry.maxHP
@@ -398,8 +404,29 @@ function HPBars:updateRoomEntities()
 			table.insert(currentBossesSorted, boss)
 		end
 	end
-	-- invert sorted table
+
 	local len = #currentBossesSorted
+	local sortFunctionGroups = {}
+	-- apply custom sort funcs
+	for i = len - 1, 1, -1 do
+		local bossEntry = currentBossesSorted[i]
+		if type(bossEntry.sorting) == "function" then
+			local group = bossEntry.entity.Type .. "." .. bossEntry.entity.Variant
+			if not sortFunctionGroups[group] then
+				sortFunctionGroups[group] = {}
+			end
+			table.insert(sortFunctionGroups[group], table.remove(currentBossesSorted, i))
+		end
+	end
+	for _, tableToSort in pairs(sortFunctionGroups) do
+		table.sort(tableToSort,
+			function(boss1, boss2) return boss1.sorting(boss1.entity, boss2.entity) end)
+		for _, value in ipairs(tableToSort) do
+			table.insert(currentBossesSorted, value)
+		end
+	end
+
+	-- invert sorted table
 	for i = len - 1, 1, -1 do
 		currentBossesSorted[len] = table.remove(currentBossesSorted, i)
 	end

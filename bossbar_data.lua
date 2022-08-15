@@ -423,7 +423,7 @@ HPBars.BarStyles = {
 		sprite = barPath .. "bossbar_design_terraria.png",
 		idleColoring = HPBars.BarColorings.none,
 		notchSprite = barPath .. "bossbar_notches_terraria.png",
-		hitColoring = Color(1, 1, 1, 1, 1, 0, 0, 0),
+		hitColoring = Color(1, 1, 1, 1, 1, 0, 0),
 		tooltip = "Styled like its in Terraria"
 	},
 	["TM Trainer"] = {
@@ -470,6 +470,8 @@ HPBars.BossDefinitions = {
 		bossColors = Table of possible boss color suffix. Example: {"orange","black"} --> BosscolorIDx 0 = orange, IDx: 1 = black
 		offset = offset of the icon sprite to the start of the bar, used to prevent overlapping of the last percents of the hp
 		barSyle = Specific bar-style the boss should use. Value can either be the Name of the entry from the HPBars.BarStyles table or a new table formated the same as an entry in the HPBars.BarStyles table
+		forceSegmentation = if set to true, this boss will ignore the boss grouping algorithm of the config option "sorting = bosses"
+		sorting = function that can be used to define how entities of the same type should be sorted. the function should return true for when the first entity should be displayed before the second.
 	}
 	]] --
 	["UNDEFINED"] = {},
@@ -624,6 +626,7 @@ HPBars.BossDefinitions = {
 		conditionalSprites = {
 			{"isI1Equal", path .. "chapter4/lokii_2.png", {2}}
 		},
+		sorting = function(entity1, entity2) return entity1:ToNPC().I1 == 2 end,
 		offset = Vector(-3, 0)
 	},
 	["71.0"] = {sprite = path .. "chapter2/fistula_large.png", bossColors={ "_grey", }, offset = Vector(-7, 0)},
@@ -637,16 +640,17 @@ HPBars.BossDefinitions = {
 	["76.0"] = {sprite = path .. "chapter4/blastocyst_small.png", offset = Vector(-3, 0)},
 	["78.0"] = {sprite = path .. "final/moms_heart.png", offset = Vector(-6, 0)},
 	["78.1"] = {sprite = path .. "final/it_lives.png", offset = Vector(-8, 0)},
-	["79.0"] = {sprite = path .. "chapter1/gemini_contusion.png", bossColors={ "_green", "_blue", }, offset = Vector(-6, 0)},
-	["79.1"] = {sprite = path .. "chapter1/steven_big.png", barStyle = "Steven", offset = Vector(-5, 0)},
-	["79.2"] = {sprite = path .. "chapter1/blighted_ovum.png", offset = Vector(-4, 0)},
+	["79.0"] = {sprite = path .. "chapter1/gemini_contusion.png", bossColors={ "_green", "_blue", }, offset = Vector(-6, 0), forceSegmentation = true},
+	["79.1"] = {sprite = path .. "chapter1/steven_big.png", barStyle = "Steven", offset = Vector(-5, 0), forceSegmentation = true},
+	["79.2"] = {sprite = path .. "chapter1/blighted_ovum.png", offset = Vector(-4, 0), forceSegmentation = true},
 	["79.10"] = {
 		sprite = path .. "chapter1/gemini_suture.png",
 		conditionalSprites = {
 			{"animationNameEndsWith", path .. "chapter1/gemini_suture_angry.png", {"02"}}
 		}, 
 		bossColors={ "_green", "_blue", },
-		offset = Vector(-5, 0)
+		offset = Vector(-5, 0), 
+		forceSegmentation = true
 	},
 	["79.11"] = {
 		sprite = path .. "chapter1/steven_small.png",
@@ -654,7 +658,8 @@ HPBars.BossDefinitions = {
 		conditionalSprites = {
 			{"animationNameEndsWith", path .. "chapter1/steven_small_angry.png", {"02"}}
 		},
-		offset = Vector(-3, 0)
+		offset = Vector(-3, 0), 
+		forceSegmentation = true
 	},
 	["81.0"] = {sprite = path .. "chapter1/the_fallen.png", offset = Vector(-7, 2)},
 	["81.1"] = {sprite = path .. "minibosses/krampus.png", offset = Vector(-6, 0)},
@@ -668,9 +673,10 @@ HPBars.BossDefinitions = {
 			{"animationNameStartsWith", path .. "chapter3/mask_of_infamy_phase2.png", {"Angry"}}
 		}, 
 		bossColors={ "_black", },
-		offset = Vector(-4, 2)
+		offset = Vector(-4, 2),
+		forceSegmentation = true
 	},
-	["98.0"] = {sprite = path .. "chapter3/heart_of_infamy.png", bossColors={ "_black", }, offset = Vector(-2, 0)},
+	["98.0"] = {sprite = path .. "chapter3/heart_of_infamy.png", bossColors={ "_black", }, offset = Vector(-2, 0), forceSegmentation = true},
 	["99.0"] = {sprite = path .. "chapter2/gurdy_jr.png", bossColors={ "_blue", "_yellow", }, offset = Vector(-5, 0)},
 	["100.0"] = {sprite = path .. "chapter1/widow.png", bossColors={ "_black", "_pink", }, offset = Vector(-6, 0)},
 	["100.1"] = {sprite = path .. "chapter2/the_wretched.png", offset = Vector(-6, 0)},
@@ -773,7 +779,7 @@ HPBars.BossDefinitions = {
 	},
 	["408.0"] = {sprite = path .. "unused/skinless_hush.png", offset = Vector(-8, 0)},
 	["409.0"] = {sprite = path .. "chapter2/rag_mega.png", offset = Vector(-7, 0)},
-	["410.0"] = {sprite = path .. "chapter3/sisters_vis.png", offset = Vector(-5, 0)},
+	["410.0"] = {sprite = path .. "chapter3/sisters_vis.png", offset = Vector(-5, 0), forceSegmentation = true},
 	["411.0"] = {sprite = path .. "chapter2/big_horn.png", ignoreInvincible = true, offset = Vector(-9, -2)},
 	["412.0"] = {
 		sprite = path .. "final/delirium.png",
@@ -810,7 +816,8 @@ HPBars.BossDefinitions = {
 			{"animationNameContains", path .. "chapter3/heart_of_infamy.png", {"3"}},
 			{"animationNameContains", path .. "chapter3/heart_of_infamy.png", {"Attack"}}
 		},
-		offset = Vector(-3, 0)
+		offset = Vector(-3, 0),
+		forceSegmentation = true
 	},
 	["903.1"] = {
 		sprite = path .. "altpath/the_visage_mask.png",
@@ -818,7 +825,8 @@ HPBars.BossDefinitions = {
 			{"animationNameContains", path .. "altpath/the_visage_mask_phase2.png", {"Angry"}},
 			{"animationNameContains", path .. "altpath/the_visage_mask_phase2.png", {"2"}}
 		},
-		offset = Vector(-3, 0)
+		offset = Vector(-3, 0),
+		forceSegmentation = true
 	},
 	["904.0"] = {sprite = path .. "altpath/siren.png", offset = Vector(-8, 0)},
 	["905.0"] = {sprite = path .. "altpath/the_heretic.png", offset = Vector(-8, 0)},
@@ -832,9 +840,9 @@ HPBars.BossDefinitions = {
 	},
 	["908.0"] = {sprite = path .. "chapter1/baby_plum.png", offset = Vector(-5, 0)},
 	["909.0"] = {sprite = path .. "altpath/the_scourge.png", offset = Vector(-5, 0)},
-	["910.0"] = {sprite = path .. "altpath/chimera_head.png", offset = Vector(-8, 0)},
-	["910.1"] = {sprite = path .. "altpath/chimera_body.png", offset = Vector(-8, 0)},
-	["910.2"] = {sprite = path .. "altpath/chimera_head.png", offset = Vector(-8, 0)},
+	["910.0"] = {sprite = path .. "altpath/chimera_head.png", offset = Vector(-8, 0), forceSegmentation = true},
+	["910.1"] = {sprite = path .. "altpath/chimera_body.png", offset = Vector(-8, 0), forceSegmentation = true},
+	["910.2"] = {sprite = path .. "altpath/chimera_head.png", offset = Vector(-8, 0), forceSegmentation = true},
 	["911.0"] = {sprite = path .. "altpath/rotgut_mouth.png", offset = Vector(-9, 0)},
 	["911.1"] = {sprite = path .. "altpath/rotgut_maggot.png", offset = Vector(-5, 2)},
 	["911.2"] = {sprite = path .. "altpath/rotgut_balls.png", offset = Vector(-4, 0)},
