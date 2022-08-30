@@ -889,8 +889,8 @@ HPBars.BossDefinitions = {
 	},
 	["950.2"] = {
 		-- dogma wing phase
-		sprite = path .. "final/dogma.png",
-		iconAnm2 = path .. "final/dogma_icon.anm2",
+		sprite = path .. "final/dogma_phase2.png",
+		iconAnm2 = path .. "final/dogma_icon_64.anm2",
 		iconAnimationType = "Animated",
 		barStyle = "Dogma",
 		offset = Vector(-3, 0)
@@ -900,20 +900,30 @@ HPBars.BossDefinitions = {
 		barStyle = "Beast",
 		offset = Vector(-11, 0)
 	},
-	["951.10"] = {sprite = path .. "final/ultra_famine.png", offset = Vector(-10, 0)},
+	["951.10"] = {
+		sprite = path .. "final/ultra_famine.png",
+		iconAnm2 = path .. "bosshp_icon_64px.anm2",
+		offset = Vector(-10, 0)
+	},
 	["951.20"] = {
 		sprite = path .. "final/ultra_pestilence.png",
+		iconAnm2 = path .. "bosshp_icon_64px.anm2",
 		conditionalSprites = {
-			{"isHPSmallerPercent", path .. "final/ultra_pestilence_phase2.png", {40}}
+			{ "isHPSmallerPercent", path .. "final/ultra_pestilence_phase2.png", { 40 } }
 		},
 		offset = Vector(-10, 0)
 	},
 	["951.30"] = {
 		sprite = path .. "final/ultra_war.png",
+		iconAnm2 = path .. "bosshp_icon_64px.anm2",
 		conditionalSprites = {
-			{"isHPSmallerPercent", path .. "final/ultra_war_phase2.png", {50}}
+			{ "isHPSmallerPercent", path .. "final/ultra_war_phase2.png", { 50 } }
 		},
 		offset = Vector(-10, 0)
 	},
-	["951.40"] = {sprite = path .. "final/ultra_death.png", offset = Vector(-10, 0)}
+	["951.40"] = {
+		sprite = path .. "final/ultra_death.png",
+		iconAnm2 = path .. "bosshp_icon_64px.anm2",
+		offset = Vector(-10, 0)
+	}
 }
