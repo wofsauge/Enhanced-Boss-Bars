@@ -71,7 +71,7 @@ function HPBars:getIconSprite(bossDefinition, tableEntry, barStyle)
 	if tableEntry.bossColorIDx >= 0 and bossDefinition.bossColors then
 		iconSuffix = bossDefinition.bossColors[tableEntry.bossColorIDx+1] or ""
 	end
-	
+
 	local iconFile = HPBars:evaluateConditionals(bossDefinition, tableEntry) or bossDefinition.sprite or barStyle.defaultIcon
 	return string.gsub(iconFile, ".png", iconSuffix..".png")
 end
@@ -209,7 +209,7 @@ function HPBars:updateSprites(bossEntry)
 	HPBars:setBarStyle(bossEntry, barStyle)
 
 	local iconToLoad = HPBars:getIconSprite(bossDefinition, bossEntry, barStyle)
-	
+
 	HPBars:setIcon(bossEntry, iconToLoad, bossDefinition)
 	bossEntry.sorting = bossDefinition.sorting
 	bossEntry.iconSprite:Update()
@@ -633,7 +633,11 @@ function HPBars:onRender()
 		end
 	end
 end
-HPBars:AddCallback(ModCallbacks.MC_POST_RENDER, HPBars.onRender)
+if StageAPI and StageAPI.Loaded then
+	StageAPI.AddCallback("EnhancedBossBars", "POST_HUD_RENDER", 1, HPBars.onRender)
+else
+	HPBars:AddCallback(ModCallbacks.MC_POST_RENDER, HPBars.onRender)
+end
 
 --------------------------------
 --------Handle Savadata---------
