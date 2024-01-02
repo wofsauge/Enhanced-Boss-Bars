@@ -218,9 +218,9 @@ HPBars.ColoringFunctions = {
 			end
 		end
 	end,
-	["WhiteToRed"] = function(bossEntry)d
+	["WhiteToRed"] = function(bossEntry)
 		local curTime = game:GetFrameCount()
-		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 0 and HPBars.Config.EnableFlashing then
+		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 1 and HPBars.Config.EnableFlashing then
 			if bossEntry.hitState == "heal" then
 				bossEntry.barSprite.Color = bossEntry.barStyle.healColoring
 			elseif bossEntry.hitState == "damage" then
