@@ -193,9 +193,9 @@ HPBars.BossIgnoreList = {
 }
 
 HPBars.BarColorings = {
-	vanillaDefault = Color(0.9, 0.9, 0.9, 1, 0, -1, -1), -- red tint
-	vanillaHit = Color(0.1, 0.1, 0.1, 1, 0, 0, 0), -- black coloring
-	vanillaHeal = Color(1, 0.54, 0, 1, 0, 0, 0), -- orange coloring
+	vanillaDefault = Color(0.8, 0, 0, 1, 0, 0, 0), -- red tint
+	vanillaHit = Color(0.48, 0, 0, 1, 0, 0, 0), -- black coloring
+	vanillaHeal = Color(0.87, 0.4, 0, 1, 0, 0, 0), -- orange coloring
 	vanillaInvincible = Color(1, 1, 1, 0.5, 0.25, 0.25, 0.25), -- gray coloring
 	white = Color(1, 1, 1, 1, 1, 1, 1), -- full white coloring
 	none = Color(1, 1, 1, 1, 0, 0, 0) -- no coloring
@@ -204,7 +204,7 @@ HPBars.BarColorings = {
 HPBars.ColoringFunctions = {
 	["Vanilla"] = function(bossEntry)
 		local curTime = game:GetFrameCount()
-		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 0 and HPBars.Config.EnableFlashing then
+		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 1 and HPBars.Config.EnableFlashing then
 			if bossEntry.hitState == "heal" then
 				bossEntry.barSprite.Color = bossEntry.barStyle.healColoring
 			elseif bossEntry.hitState == "damage" then
@@ -218,7 +218,7 @@ HPBars.ColoringFunctions = {
 			end
 		end
 	end,
-	["WhiteToRed"] = function(bossEntry)
+	["WhiteToRed"] = function(bossEntry)d
 		local curTime = game:GetFrameCount()
 		if bossEntry.lastStateChangeFrame + 7 >= curTime and curTime % 2 == 0 and HPBars.Config.EnableFlashing then
 			if bossEntry.hitState == "heal" then
@@ -459,7 +459,7 @@ HPBars.BarStyles = {
 }
 
 HPBars.BossDefinitions = {
-	--[[ Format: ["Type.Variant"] = { 
+	--[[ Format: ["Type.Variant"] = {
 		sprite = main sprite that this entity should use as its icon
 		ignoreInvincible = if set to true, this will make the boss bar to not show invincible state
 		iconAnm2 = Path to a .anm2 file this icon should use instead of the default one.
@@ -647,9 +647,9 @@ HPBars.BossDefinitions = {
 		sprite = path .. "chapter1/gemini_suture.png",
 		conditionalSprites = {
 			{"animationNameEndsWith", path .. "chapter1/gemini_suture_angry.png", {"02"}}
-		}, 
+		},
 		bossColors={ "_green", "_blue", },
-		offset = Vector(-5, 0), 
+		offset = Vector(-5, 0),
 		forceSegmentation = true
 	},
 	["79.11"] = {
@@ -658,7 +658,7 @@ HPBars.BossDefinitions = {
 		conditionalSprites = {
 			{"animationNameEndsWith", path .. "chapter1/steven_small_angry.png", {"02"}}
 		},
-		offset = Vector(-3, 0), 
+		offset = Vector(-3, 0),
 		forceSegmentation = true
 	},
 	["81.0"] = {sprite = path .. "chapter1/the_fallen.png", offset = Vector(-7, 2)},
@@ -671,7 +671,7 @@ HPBars.BossDefinitions = {
 		sprite = path .. "chapter3/mask_of_infamy.png",
 		conditionalSprites = {
 			{"animationNameStartsWith", path .. "chapter3/mask_of_infamy_phase2.png", {"Angry"}}
-		}, 
+		},
 		bossColors={ "_black", },
 		offset = Vector(-4, 2),
 		forceSegmentation = true
