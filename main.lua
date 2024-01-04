@@ -633,7 +633,9 @@ function HPBars:onRender()
 		end
 	end
 end
-if StageAPI and StageAPI.Loaded then
+if REPENTOGON then
+	HPBars:AddCallback(ModCallbacks.MC_HUD_RENDER, HPBars.onRender)
+elseif StageAPI and StageAPI.Loaded then
 	StageAPI.AddCallback("EnhancedBossBars", "POST_HUD_RENDER", 1, HPBars.onRender)
 else
 	HPBars:AddCallback(ModCallbacks.MC_POST_RENDER, HPBars.onRender)
