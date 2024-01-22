@@ -238,6 +238,8 @@ function HPBars:evaluateEntityIgnore(entity)
 end
 
 function HPBars:createNewBossBar(entity)
+	if not entity then return end -- sanity check
+
 	local barStyle = HPBars:getBarStyle(HPBars.Config["BarStyle"])
 
 	local icon = Sprite()
@@ -278,6 +280,7 @@ function HPBars:createNewBossBar(entity)
 end
 
 function HPBars:removeBarEntry(entity)
+	if not entity then return end -- sanity check
 	HPBars.currentBosses[GetPtrHash(entity)] = nil
 end
 
@@ -350,7 +353,7 @@ function HPBars:updateRoomEntities()
 			HPBars:setIcon(mainBoss, barStyle.defaultIcon, {})
 		end
 
-		for i, boss in ipairs(sortedBosses) do
+		for _, boss in ipairs(sortedBosses) do
 			mainBoss.sumMaxHP = mainBoss.sumMaxHP + boss.maxHP
 			mainBoss.sumHP = mainBoss.sumHP + boss.hp
 			mainBoss.ignoreInvincible = mainBoss.ignoreInvincible or boss.ignoreInvincible
