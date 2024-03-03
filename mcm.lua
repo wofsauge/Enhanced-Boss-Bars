@@ -50,25 +50,25 @@ local function GenerateMCMEntry()
 	local selectedPreset = 1
 	table.sort(availablePresets)
 
-		MCM.AddSetting(
-			mcmName,
-			"Presets",
-			{
-				Type = ModConfigMenu.OptionType.NUMBER,
-				CurrentSetting = function()
-					return AnIndexOf(availablePresets, selectedPreset)
-				end,
-				Minimum = 1,
-				Maximum = #availablePresets,
-				Display = function()
-					return availablePresets[selectedPreset]
-				end,
-				OnChange = function(currentNum)
-					selectedPreset = currentNum == selectedPreset and 1 or currentNum
-				end,
-				Info = function() return HPBars.PresetConfigs[availablePresets[selectedPreset]]["_MCMTooltip"] end
-			}
-		)
+	MCM.AddSetting(
+		mcmName,
+		"Presets",
+		{
+			Type = ModConfigMenu.OptionType.NUMBER,
+			CurrentSetting = function()
+				return selectedPreset
+			end,
+			Minimum = 1,
+			Maximum = #availablePresets,
+			Display = function()
+				return availablePresets[selectedPreset]
+			end,
+			OnChange = function(currentNum)
+				selectedPreset = currentNum
+			end,
+			Info = function() return HPBars.PresetConfigs[availablePresets[selectedPreset]]["_MCMTooltip"] end
+		}
+	)
 
 	MCM.AddSpace(mcmName, "Presets")
 
