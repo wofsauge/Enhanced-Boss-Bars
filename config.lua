@@ -40,7 +40,7 @@ HPBars.UserConfig = {
     -- Enables a white coloring of the bars, when the enemy is invincible
     -- Default value: true
     ["EnableInvicibilityIndication"] = true,
-    -- If the boss is a champion and this is enabled, the icon will be colored the same way as the boss 
+    -- If the boss is a champion and this is enabled, the icon will be colored the same way as the boss
     -- Default value: true
     ["UseChampionColors"] = true,
     -- Disable bars when the player has the Spidermod item
@@ -114,10 +114,12 @@ HPBars.PresetConfigs.Default = {
     ["ShowInBeastFight"] = true,
     ["ShowInMotherFight"] = true,
     ["ShowMegaSatan"] = true,
-    
+
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
     ["TextSize"] = 0.5,
+
+    ["_MCMTooltip"] = {"Recommended settings", "Enhances the gameplay and adds a lot of QoL features"},
 }
 
 HPBars.PresetConfigs.Vanilla = {
@@ -140,10 +142,12 @@ HPBars.PresetConfigs.Vanilla = {
     ["ShowInBeastFight"] = false,
     ["ShowInMotherFight"] = false,
     ["ShowMegaSatan"] = false,
-    
+
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
     ["TextSize"] = 0.5,
+
+    ["_MCMTooltip"] = {"Vanilla experience", "Tries to emulate the exact behavior as it is in the main game"},
 }
 HPBars.PresetConfigs.Antibirth = {
     ["BarStyle"] = "Default",
@@ -165,8 +169,10 @@ HPBars.PresetConfigs.Antibirth = {
     ["ShowInBeastFight"] = false,
     ["ShowInMotherFight"] = true,
     ["ShowMegaSatan"] = false,
-    
+
     ["InfoText"] = "None",
     ["TextTransparency"] = 1,
     ["TextSize"] = 0.5,
+
+    ["_MCMTooltip"] = {"Antibirth experience", "Same as Vanilla, but the bar is on top of the screen"},
 }
