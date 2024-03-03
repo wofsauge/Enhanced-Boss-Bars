@@ -667,7 +667,7 @@ function HPBars:evaluateBadLoad()
 end
 
 local json = require("json")
-function OnGameStart(_, isSave)
+function HPBars:OnGameStart(isSave)
 	badload = HPBars:evaluateBadLoad()
 	HPBars.currentBosses = {}
 	currentBossesSorted = {}
@@ -698,10 +698,10 @@ function OnGameStart(_, isSave)
 		end
 	end
 end
-HPBars:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, OnGameStart)
+HPBars:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, HPBars.OnGameStart)
 
 --Saving Moddata--
-function SaveGame()
+function HPBars:SaveGame()
 	HPBars.SaveData(HPBars, json.encode(HPBars.Config))
 end
-HPBars:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, SaveGame)
+HPBars:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, HPBars.SaveGame)
