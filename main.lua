@@ -343,6 +343,11 @@ function HPBars:updateRoomEntities()
 		end
 	)
 
+	-- If main boss is delirium, dont apply any bar splitting or bar combinating operators
+	if #sortedBosses > 0 and sortedBosses[1].entity.Type == 412 then
+		sortedBosses = {sortedBosses[1]}
+	end
+
 	currentBossesSorted = {}
 
 	if HPBars.Config.Sorting == "Vanilla" and #sortedBosses > 0 then
