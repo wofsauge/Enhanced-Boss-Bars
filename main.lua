@@ -248,9 +248,12 @@ function HPBars:createNewBossBar(entity)
 	local bossHPsprite = Sprite()
 	bossHPsprite:Load(barStyle.barAnm2, true)
 	local entityNPC = entity:ToNPC()
+	local bossColor = entityNPC and entityNPC:GetBossColorIdx() or -1
+	if REPENTOGON then bossColor = math.max(bossColor - 1, -1) end -- Repentogon bossColorIDs start at id 1 instead of 0 in vanilla
+
 	local championColor =
 		entityNPC and HPBars.Config.UseChampionColors and
-		(entityNPC:GetChampionColorIdx() >= 0 or entityNPC:GetBossColorIdx() >= 0) and
+		(entityNPC:GetChampionColorIdx() >= 0 or bossColor >= 0) and
 		HPBars:copyColor(entity:GetColor()) or
 		nil
 
@@ -259,7 +262,7 @@ function HPBars:createNewBossBar(entity)
 		hp = entity.HitPoints or 0,
 		maxHP = entity.MaxHitPoints or 0,
 		entityColor = championColor,
-		bossColorIDx = entityNPC and entityNPC:GetBossColorIdx() or -1,
+		bossColorIDx = entityNPC and bossColor or -1,
 		iconSprite = icon,
 		iconOffset = Vector(-4, 0),
 		iconAnimationType = "HP",
