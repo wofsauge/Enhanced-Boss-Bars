@@ -526,7 +526,7 @@ function HPBars:renderIcon(bossEntry, barPos, hpbarFill)
 end
 
 function HPBars:renderStatusIcons(bossEntry, barPos)
-	if REPENTOGON and HPBars.Config.ShowStatusEffects then
+	if HPBars.Config.ShowStatusEffects then
 		local activeEffects = 0
 		for frameID, condition in pairs(HPBars.StatusEffectConditions) do
 			if condition(bossEntry.entity) then

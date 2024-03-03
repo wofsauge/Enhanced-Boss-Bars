@@ -19,7 +19,7 @@ HPBars.UserConfig = {
     -- Toggle if boss specific icons should be shown. If this option is set to false, it will display the vanilla icon
     -- Default value: true
     ["ShowCustomIcons"] = true,
-    -- Toggle if status effects should be displayed (Only available with Repentogon)
+    -- Toggle if status effects should be displayed
     -- Default value: true
     ["ShowStatusEffects"] = true,
     -- Allows some bosses to use their special boss bar designs
