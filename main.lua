@@ -15,6 +15,9 @@ local badload = false
 
 local enableDebug = false
 
+HPBars.StatusIconSprite = Sprite()
+HPBars.StatusIconSprite:Load(HPBars.iconPath .. "statuseffect_icon.anm2", true)
+
 function HPBars:getScreenSize()
 	local room = game:GetRoom()
 	local pos = room:WorldToScreenPosition(Vector(0, 0)) - room:GetRenderScrollOffset() - game.ScreenShakeOffset
@@ -522,6 +525,23 @@ function HPBars:renderIcon(bossEntry, barPos, hpbarFill)
 	end
 end
 
+function HPBars:renderStatusIcons(bossEntry, barPos)
+	if REPENTOGON and HPBars.Config.ShowStatusEffects then
+		local activeEffects = 0
+		for frameID, condition in pairs(HPBars.StatusEffectConditions) do
+			if condition(bossEntry.entity) then
+				activeEffects = activeEffects + 1
+				HPBars.StatusIconSprite:SetFrame("idle", frameID)
+				if HPBars:isVerticalLayout() then
+					HPBars.StatusIconSprite:Render(barPos + Vector(-6, -activeEffects * 10), Vector.Zero, Vector.Zero)
+				else
+					HPBars.StatusIconSprite:Render(barPos + Vector(activeEffects * 10, -6), Vector.Zero, Vector.Zero)
+				end
+			end
+		end
+	end
+end
+
 function HPBars:renderOverlays(bossEntry, barPos, hpbarFill, barSizePercent)
 	local rotation = HPBars:isVerticalLayout() and -90 or 0
 
@@ -639,6 +659,8 @@ function HPBars:onRender()
 			HPBars:renderOverlays(boss, barPos, hpbarFill, barSizePercent)
 
 			HPBars:renderIcon(boss, barPos, hpbarFill)
+
+			HPBars:renderStatusIcons(boss, barPos)
 
 			HPBars:renderInfoText(boss, barPos, barSize)
 		end

@@ -29,6 +29,28 @@ HPBars.barSizes = {
 	}
 }
 
+if REPENTOGON then
+	local function isDummyBarVisible(entity)
+		return entity and HPBars.MCMLoaded and HPBars:isMCMVisible() and GetPtrHash(Isaac.GetPlayer()) == GetPtrHash(entity)
+	end
+
+	HPBars.StatusEffectConditions = {
+		[0] = function(entity) return entity and entity:GetFreezeCountdown() > 0 end,
+		[1] = function(entity) return entity and entity:GetCharmedCountdown() > 0 end,
+		[2] = function(entity) return entity and entity:GetBurnCountdown() > 0 or isDummyBarVisible(entity) end,
+		-- 3 (crown effect) is not able to occur on bosses
+		[4] = function(entity) return entity and entity:GetFearCountdown() > 0 end,
+		[5] = function(entity) return entity and entity:GetPoisonCountdown() > 0 end,
+		[6] = function(entity) return entity and entity:GetSlowingCountdown() > 0 end,
+		[7] = function(entity) return entity and entity:GetConfusionCountdown() > 0 end,
+		[8] = function(entity) return entity and entity:GetMagnetizedCountdown() > 0 end,
+		[9] = function(entity) return entity and entity:GetBrimstoneMarkCountdown() > 0 end,
+		[10] = function(entity) return entity and entity:GetBleedingCountdown() > 0 end,
+		[11] = function(entity) return entity and entity:GetBaitedCountdown() > 0 end,
+		[12] = function(entity) return entity and entity:GetWeaknessCountdown() > 0 end
+	}
+end
+
 -- table of condition macros used to alter the displayed boss icon
 HPBars.Conditions = {
 	["isHeadSegment"] = function(entity)
