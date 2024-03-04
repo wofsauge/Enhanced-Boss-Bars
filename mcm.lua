@@ -424,30 +424,28 @@ local function GenerateMCMEntry()
 		}
 	)
 
-	if REPENTOGON then
-		-- Toggle Status effect icons
-		MCM.AddSetting(
-			mcmName,
-			"Icons",
-			{
-				Type = ModConfigMenu.OptionType.BOOLEAN,
-				CurrentSetting = function()
-					return HPBars.Config["ShowStatusEffects"]
-				end,
-				Display = function()
-					local onOff = "False"
-					if HPBars.Config["ShowStatusEffects"] then
-						onOff = "True"
-					end
-					return "Show status effects: " .. onOff
-				end,
-				OnChange = function(currentBool)
-					HPBars.Config["ShowStatusEffects"] = currentBool
-				end,
-				Info = { "Toggle if active status effects should be displayed"}
-			}
-		)
-	end
+	-- Toggle Status effect icons
+	MCM.AddSetting(
+		mcmName,
+		"Icons",
+		{
+			Type = ModConfigMenu.OptionType.BOOLEAN,
+			CurrentSetting = function()
+				return HPBars.Config["ShowStatusEffects"]
+			end,
+			Display = function()
+				local onOff = "False"
+				if HPBars.Config["ShowStatusEffects"] then
+					onOff = "True"
+				end
+				return "Show status effects: " .. onOff
+			end,
+			OnChange = function(currentBool)
+				HPBars.Config["ShowStatusEffects"] = currentBool
+			end,
+			Info = { "Toggle if active status effects should be displayed"}
+		}
+	)
 
 	-- Enable Champion coloring
 	MCM.AddSetting(
