@@ -231,12 +231,24 @@ function HPBars:evaluateEntityIgnore(entity)
 	if entity:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) then
 		return true
 	end
+
+	-- If main boss is delirium, dont apply any bar splitting or bar combinating operators
+	local parent = entity.Parent
+	while parent ~= nil do
+		if parent.Type == 412 then
+			return true
+		end
+		parent = parent.Parent
+	end
+
+	-- Apply boss specific custom ignore rules
 	if ignoreEntry then
 		if type(ignoreEntry) == "function" then
 			return ignoreEntry(entity)
 		end
 		return ignoreEntry
 	end
+
 	return false
 end
 
@@ -345,11 +357,6 @@ function HPBars:updateRoomEntities()
 			return a.entity.Index < b.entity.Index
 		end
 	)
-
-	-- If main boss is delirium, dont apply any bar splitting or bar combinating operators
-	if #sortedBosses > 0 and sortedBosses[1].entity.Type == 412 then
-		sortedBosses = {sortedBosses[1]}
-	end
 
 	currentBossesSorted = {}
 
