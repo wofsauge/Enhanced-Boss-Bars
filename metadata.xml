@@ -43,7 +43,7 @@ Alternatively you can edit the config.lua file found in the mod files.
 [/list]
 
 [img]https://i.imgur.com/P6a8043.png[/img] [url=https://github.com/wofsauge/Enhanced-Boss-Bars]Any Problems or want to help? Visit this project on GitHub[/url]</description>
-    <version>1.23</version>
+    <version>1.24</version>
     <visibility>Public</visibility>
     <tag id="Lua"/>
     <tag id="Bosses"/>
