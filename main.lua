@@ -234,10 +234,15 @@ function HPBars:evaluateEntityIgnore(entity)
 
 	-- If main boss is delirium, dont apply any bar splitting or bar combinating operators
 	local parent = entity.Parent
+	local visitedEntities = {}
 	while parent ~= nil do
 		if parent.Type == 412 then
 			return true
 		end
+		if visitedEntities[GetPtrHash(parent)] then
+			break
+		end
+		visitedEntities[GetPtrHash(parent)] = true
 		parent = parent.Parent
 	end
 
