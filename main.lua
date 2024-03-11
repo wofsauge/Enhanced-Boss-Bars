@@ -269,7 +269,6 @@ function HPBars:createNewBossBar(entity)
 	bossHPsprite:Load(barStyle.barAnm2, true)
 	local entityNPC = entity:ToNPC()
 	local bossColor = entityNPC and entityNPC:GetBossColorIdx() or -1
-	if REPENTOGON then bossColor = math.max(bossColor - 1, -1) end -- Repentogon bossColorIDs start at id 1 instead of 0 in vanilla
 
 	local championColor =
 		entityNPC and HPBars.Config.UseChampionColors and
