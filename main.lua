@@ -226,9 +226,7 @@ function HPBars:updateSprites(bossEntry)
 end
 
 function HPBars:evaluateEntityIgnore(entity)
-	local entityString = entity.Type .. "." .. entity.Variant
-	local ignoreEntry = HPBars.BossIgnoreList[entityString]
-	if entity:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) then
+	if entity:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) or entity:HasEntityFlags(EntityFlag.FLAG_DONT_COUNT_BOSS_HP) then
 		return true
 	end
 
@@ -247,6 +245,8 @@ function HPBars:evaluateEntityIgnore(entity)
 	end
 
 	-- Apply boss specific custom ignore rules
+	local entityString = entity.Type .. "." .. entity.Variant
+	local ignoreEntry = HPBars.BossIgnoreList[entityString]
 	if ignoreEntry then
 		if type(ignoreEntry) == "function" then
 			return ignoreEntry(entity)
