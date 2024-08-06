@@ -518,13 +518,13 @@ HPBars.BossDefinitions = {
 		conditionalSprites = {
 			{
 				function(entity)
-					return entity.Parent == nil and entity:ToNPC().I2 == 1
+					return entity.Parent == nil and entity.Child ~= nil and entity:ToNPC().I2 == 1
 				end,
 				path .. "altpath/tuff_twin_exposed.png"
 			},
 			{
 				function(entity)
-					return entity.Parent ~= nil and entity:ToNPC().I2 == 1
+					return entity.Parent ~= nil and entity.Child ~= nil and entity:ToNPC().I2 == 1
 				end,
 				path .. "altpath/tuff_twin_segment_exposed.png"
 			},
