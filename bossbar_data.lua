@@ -2,6 +2,9 @@ local path = HPBars.iconPath
 local barPath = HPBars.barPath
 local game = Game()
 
+-- offset to the bottom screen center for the boss bar of Gideon
+HPBars.GideonBarOffset = Vector(-22, -13.5)
+
 HPBars.barSizes = {
 	horizontal = {
 		[1] = 120,
@@ -170,7 +173,6 @@ HPBars.BossIgnoreList = {
 		return entity.SpawnerEntity ~= nil
 	end,
 	["906.1"] = true, -- hornfel decoy
-	["907.0"] = true, -- Gideon (will be handled by the game itself)
 	["912.0"] = function(entity) -- Mother Segments
 		return entity.Parent ~= nil or entity:GetSprite():GetAnimation() == "Transition" or
 			not HPBars.Config.ShowInMotherFight
@@ -218,7 +220,8 @@ HPBars.BarColorings = {
 	vanillaHeal = Color(0.87, 0.4, 0, 1, 0, 0, 0), -- orange coloring
 	vanillaInvincible = Color(1, 1, 1, 0.5, 0.25, 0.25, 0.25), -- gray coloring
 	white = Color(1, 1, 1, 1, 1, 1, 1), -- full white coloring
-	none = Color(1, 1, 1, 1, 0, 0, 0) -- no coloring
+	none = Color(1, 1, 1, 1, 0, 0, 0), -- no coloring
+	gideon = Color(0.2, 0.2, 0.2, 1, 0, 0, 0), -- special muted color for gideon boss bar
 }
 
 HPBars.ColoringFunctions = {
@@ -858,6 +861,7 @@ HPBars.BossDefinitions = {
 		},
 		offset = Vector(-4, 0)
 	},
+	["907.0"] = {sprite = path .. "altpath/great_gideon.png", offset = Vector(-5, 0)}, -- Gideon: Game will render the bar, we render the icon. This entry stores path to boss icon/data
 	["908.0"] = {sprite = path .. "chapter1/baby_plum.png", offset = Vector(-5, 0)},
 	["909.0"] = {sprite = path .. "altpath/the_scourge.png", offset = Vector(-5, 0)},
 	["910.0"] = {sprite = path .. "altpath/chimera_head.png", offset = Vector(-8, 0), forceSegmentation = true},

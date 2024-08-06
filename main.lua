@@ -603,6 +603,59 @@ function HPBars:isIgnoreMegaSatanFight()
 	return not HPBars.Config.ShowMegaSatan and game:GetRoom():GetBossID() == 55
 end
 
+function HPBars:handleGideonBar()
+	for _, boss in pairs(currentBossesSorted) do
+		-- If gideon was detected, do special handling for its boss bar and dont render any other bars
+		-- the game has a separate bar design for gideon, that is a black bar and a wave counter text. We cant remove the text via modding api,
+		-- so we render our bar sprite at the original vanilla bar position
+		-- the boss bar of gideon renders !!after!! HUD_RENDER and POST_RENDER, so we cant render over it
+		if boss.entity.Type == 907 then
+			local screenSize = HPBars:getScreenSize()
+			local barPosition = Vector(screenSize.X / 2, screenSize.Y - 12 * Options.HUDOffset) + HPBars.GideonBarOffset
+
+			local hpbarFill = 1
+			local barSizePercent = math.floor(60 / 120 * 100) -- half sized bar is similar to original bar
+			-- render bg
+			if boss.barStyle.barAnimationType == "HP" then
+				boss.barSprite:SetFrame("bg" .. barSizePercent, hpbarFill)
+			else
+				boss.barSprite:SetAnimation("bg" .. barSizePercent, false)
+			end
+			boss.barSprite:Render(barPosition, Vector.Zero, Vector.Zero)
+
+			-- apply special color that changes the bar filling to act more like a background
+			boss.barSprite.Color = HPBars.BarColorings.gideon
+
+			-- render charge
+			if boss.barStyle.barAnimationType == "HP" then
+				boss.barSprite:SetFrame("charge" .. barSizePercent, hpbarFill)
+			else
+				boss.barSprite:SetAnimation("charge" .. barSizePercent, false)
+			end
+
+			local progress = 60 / 100 * hpbarFill
+			boss.barSprite:Render(barPosition, Vector.Zero, Vector(1 + progress, 0))
+
+			-- render end deco
+			if boss.barStyle.barAnimationType == "HP" then
+				boss.barSprite:SetFrame("endDeco", hpbarFill)
+			else
+				boss.barSprite:SetAnimation("endDeco", false)
+			end
+
+			boss.barSprite:Render(barPosition + Vector(60 - 1 - progress, 0), Vector.Zero, Vector.Zero)
+
+			boss.barSprite.Color = Color(1, 1, 1, 1, 0, 0, 0)
+
+			HPBars:renderOverlays(boss, barPosition, hpbarFill, barSizePercent)
+
+			HPBars:renderIcon(boss, barPosition, hpbarFill)
+			return true
+		end
+	end
+	return false
+end
+
 function HPBars:onRender()
 	HPBars:handleBadLoad()
 	HPBars:updateRoomEntities()
@@ -613,6 +666,11 @@ function HPBars:onRender()
 	if HPBars:isIgnoreMegaSatanFight() or not HPBars.Config.DisplayWithSpidermod and HPBars:hasSpiderMod() then
 		return
 	end
+
+	if HPBars:handleGideonBar() then
+		return
+	end
+
 	local isVertical = HPBars:isVerticalLayout()
 	local barSizesTable = isVertical and HPBars.barSizes.vertical or HPBars.barSizes.horizontal
 	local rowOffset = HPBars:getRowOffset()
