@@ -897,7 +897,13 @@ HPBars.BossDefinitions = {
 	["918.0"] = {sprite = path .. "altpath/turdlet.png", offset = Vector(-7, 0)},
 	["919.0"] = {sprite = path .. "unused/raglich.png", offset = Vector(-5, 0)},
 	["920.0"] = {sprite = path .. "altpath/horny_boys.png", offset = Vector(-5, -3)},
-	["921.0"] = {sprite = path .. "unused/clutch.png", offset = Vector(-5, 0)},
+	["921.0"] = {
+		sprite = path .. "altpath/clutch.png",
+		conditionalSprites = {
+			{"animationNameEqual", path .. "altpath/clutch_clicketyclack.png", {"Possess"}}
+		},
+		offset = Vector(-5, 0)
+	},
 	["922.0"] = {sprite = path .. "unused/cadavra.png", offset = Vector(-6, 0)},
 	["950.1"] = {
 		-- dogma tv phase
