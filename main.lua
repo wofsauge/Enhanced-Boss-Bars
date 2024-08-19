@@ -317,24 +317,26 @@ function HPBars:updateRoomEntities()
 		return
 	end
 	for _, entity in ipairs(Isaac.GetRoomEntities()) do
-		local entityHash = GetPtrHash(entity)
-		local bossEntry = HPBars.currentBosses[entityHash]
-		if entity:IsBoss() and not HPBars:evaluateEntityIgnore(entity) or bossEntry then
-			if bossEntry == nil then
-				HPBars:createNewBossBar(entity)
-			else
-				bossEntry.lastHP = bossEntry.hp
-				bossEntry.hp = entity.HitPoints
-				bossEntry.maxHP = entity.MaxHitPoints
+		if type(entity) == "userdata" then -- sanity check
+			local entityHash = GetPtrHash(entity)
+			local bossEntry = HPBars.currentBosses[entityHash]
+			if entity:IsBoss() and not HPBars:evaluateEntityIgnore(entity) or bossEntry then
+				if bossEntry == nil then
+					HPBars:createNewBossBar(entity)
+				else
+					bossEntry.lastHP = bossEntry.hp
+					bossEntry.hp = entity.HitPoints
+					bossEntry.maxHP = entity.MaxHitPoints
 
-				if bossEntry.lastHP > bossEntry.hp then
-					bossEntry.lastStateChangeFrame = game:GetFrameCount()
-					bossEntry.hitState = "damage"
-				elseif bossEntry.lastHP < bossEntry.hp then
-					bossEntry.lastStateChangeFrame = game:GetFrameCount()
-					bossEntry.hitState = "heal"
+					if bossEntry.lastHP > bossEntry.hp then
+						bossEntry.lastStateChangeFrame = game:GetFrameCount()
+						bossEntry.hitState = "damage"
+					elseif bossEntry.lastHP < bossEntry.hp then
+						bossEntry.lastStateChangeFrame = game:GetFrameCount()
+						bossEntry.hitState = "heal"
+					end
+					HPBars:updateSprites(bossEntry)
 				end
-				HPBars:updateSprites(bossEntry)
 			end
 		end
 	end
