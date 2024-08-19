@@ -18,6 +18,9 @@ local enableDebug = false
 HPBars.StatusIconSprite = Sprite()
 HPBars.StatusIconSprite:Load(HPBars.iconPath .. "statuseffect_icon.anm2", true)
 
+local gideonFont = Font() -- init font object
+gideonFont:Load("font/pftempestasevencondensed.fnt")
+
 function HPBars:getScreenSize()
 	local room = game:GetRoom()
 	local pos = room:WorldToScreenPosition(Vector(0, 0)) - room:GetRenderScrollOffset() - game.ScreenShakeOffset
@@ -652,6 +655,14 @@ function HPBars:handleGideonBar()
 			HPBars:renderOverlays(boss, barPosition, hpbarFill, barSizePercent)
 
 			HPBars:renderIcon(boss, barPosition, hpbarFill)
+
+			-- render wave counter again, because stageAPI without repentogon render callback is called after the vanilla gideon bar rendering
+			if not REPENTOGON and StageAPI and StageAPI.Loaded and boss.sumHP >= 1 then
+				local text = math.floor(boss.sumMaxHP - boss.sumHP + 1) .. "/" .. math.floor(boss.sumMaxHP)
+				local textPos = Vector(screenSize.X / 2 - 3, screenSize.Y - 12 * Options.HUDOffset - 21)
+				gideonFont:DrawString(text, textPos.X, textPos.Y, KColor(1, 1, 1, 1, 0, 0, 0), gideonFont:GetStringWidth(text), true)
+			end
+
 			return true
 		end
 	end
