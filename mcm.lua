@@ -564,7 +564,11 @@ local function GenerateMCMEntry()
 end
 
 -- use LATE priority so that external mods can easily add entries during their game start callback
-HPBars:AddPriorityCallback(ModCallbacks.MC_POST_GAME_STARTED, CallbackPriority.LATE, function() GenerateMCMEntry() end)
+if HPBars.AddPriorityCallback then -- Epic Games / GoG (Version 1.7.8a) doesnt support Priority Callbacks
+	HPBars:AddPriorityCallback(ModCallbacks.MC_POST_GAME_STARTED, CallbackPriority.LATE, function() GenerateMCMEntry() end)
+else
+	HPBars:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function() GenerateMCMEntry() end)
+end
 
 -- remove MCM entries when going to main menu, in order to prevent multiple instances of MCM settings to be initialized
 HPBars:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, function() MCM.RemoveCategory("Enhanced Boss Bars") end)
