@@ -36,22 +36,78 @@ local function isDummyBarVisible(entity)
 	return entity and HPBars.MCMLoaded and HPBars:isMCMVisible() and GetPtrHash(Isaac.GetPlayer()) == GetPtrHash(entity)
 end
 
-HPBars.StatusEffectConditions = {
-	[0] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_FREEZE) end,
-	[1] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CHARM) end,
-	[2] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BURN) or isDummyBarVisible(entity) end,
-	-- 3 (crown effect) is not able to occur on bosses
-	[4] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_FEAR) end,
-	[5] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_POISON)end,
-	[6] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_SLOW) end,
-	[7] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CONFUSION) end,
-	[8] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_MAGNETIZED) end,
-	[9] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BRIMSTONE_MARKED) end,
-	[10] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BLEED_OUT) end,
-	[11] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BAITED) end,
-	[12] = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_WEAKNESS) end
+-- Stores which sprite should be rendered and what animation / frame to use. Usage: [Identifier] = {table}
+--   condition = function used to determine if the effect should be rendered
+--   animation = Name of the animation to play
+--   frame = frame id to play
+--   sprite = Sprite object to use (if nil, uses the default "HPBars.StatusIconSprite" sprite)
+HPBars.StatusEffects = {
+	["Freeze"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_FREEZE) end,
+		animation = "idle",
+		frame = 0,
+		sprite = nil
+	},
+	["Charm"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CHARM) end,
+		animation = "idle",
+		frame = 1,
+	},
+	["Burn"] = {
+		condition = function(entity)
+			return entity and entity:HasEntityFlags(EntityFlag.FLAG_BURN) or
+				isDummyBarVisible(entity)
+		end,
+		animation = "idle",
+		frame = 2,
+	},
+	-- (crown effect) is not able to occur on bosses
+	["Fear"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_FEAR) end,
+		animation = "idle",
+		frame = 4,
+	},
+	["Poison"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_POISON) end,
+		animation = "idle",
+		frame = 5,
+	},
+	["Slow"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_SLOW) end,
+		animation = "idle",
+		frame = 6,
+	},
+	["Confusion"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CONFUSION) end,
+		animation = "idle",
+		frame = 7,
+	},
+	["Magnetized"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_MAGNETIZED) end,
+		animation = "idle",
+		frame = 8,
+	},
+	["Brimstone Marked"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BRIMSTONE_MARKED) end,
+		animation = "idle",
+		frame = 9,
+	},
+	["Bleed out"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BLEED_OUT) end,
+		animation = "idle",
+		frame = 10,
+	},
+	["Baited"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BAITED) end,
+		animation = "idle",
+		frame = 11,
+	},
+	["Weakness"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_WEAKNESS) end,
+		animation = "idle",
+		frame = 12,
+	},
 }
-
 -- table of condition macros used to alter the displayed boss icon
 HPBars.Conditions = {
 	["isHeadSegment"] = function(entity)

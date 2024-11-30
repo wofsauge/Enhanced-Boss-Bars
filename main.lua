@@ -544,14 +544,15 @@ end
 function HPBars:renderStatusIcons(bossEntry, barPos)
 	if HPBars.Config.ShowStatusEffects then
 		local activeEffects = 0
-		for frameID, condition in pairs(HPBars.StatusEffectConditions) do
-			if condition(bossEntry.entity) then
+		for _, effectEntry in pairs(HPBars.StatusEffects) do
+			if effectEntry.condition(bossEntry.entity) then
 				activeEffects = activeEffects + 1
-				HPBars.StatusIconSprite:SetFrame("idle", frameID)
+				local sprite = effectEntry.sprite or HPBars.StatusIconSprite
+				sprite:SetFrame(effectEntry.animation, effectEntry.frame)
 				if HPBars:isVerticalLayout() then
-					HPBars.StatusIconSprite:Render(barPos + Vector(-6, -activeEffects * 10), Vector.Zero, Vector.Zero)
+					sprite:Render(barPos + Vector(-6, -activeEffects * 10), Vector.Zero, Vector.Zero)
 				else
-					HPBars.StatusIconSprite:Render(barPos + Vector(activeEffects * 10, -6), Vector.Zero, Vector.Zero)
+					sprite:Render(barPos + Vector(activeEffects * 10, -6), Vector.Zero, Vector.Zero)
 				end
 			end
 		end
