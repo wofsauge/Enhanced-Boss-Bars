@@ -32,6 +32,10 @@ HPBars.barSizes = {
 	}
 }
 
+local function isDummyBarVisible(entity)
+	return entity and HPBars.MCMLoaded and HPBars:isMCMVisible() and GetPtrHash(Isaac.GetPlayer()) == GetPtrHash(entity)
+end
+
 local function isAnimaSolaChained(entity)
 	for _, chain in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.ANIMA_CHAIN)) do
 		if chain.Target then
@@ -42,10 +46,6 @@ local function isAnimaSolaChained(entity)
 		end
 	end
 	return false
-end
-
-local function isDummyBarVisible(entity)
-	return entity and HPBars.MCMLoaded and HPBars:isMCMVisible() and GetPtrHash(Isaac.GetPlayer()) == GetPtrHash(entity)
 end
 
 -- Stores which sprite should be rendered and what animation / frame to use. Usage: [Identifier] = {table}
