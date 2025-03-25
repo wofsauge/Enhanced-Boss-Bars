@@ -36,34 +36,49 @@ local function isDummyBarVisible(entity)
 	return entity and HPBars.MCMLoaded and HPBars:isMCMVisible() and GetPtrHash(Isaac.GetPlayer()) == GetPtrHash(entity)
 end
 
+local function isAnimaSolaChained(entity)
+	for _, chain in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.ANIMA_CHAIN)) do
+		if chain.Target then
+			if chain.Target.Position.X == entity.Position.X and chain.Target.Position.Y == entity.Position.Y then
+				print("true")
+				return true
+			end
+		end
+	end
+	return false
+end
+
 -- Stores which sprite should be rendered and what animation / frame to use. Usage: [Identifier] = {table}
 --   condition = function used to determine if the effect should be rendered
 --   animation = Name of the animation to play
 --   frame = frame id to play
 --   sprite = Sprite object to use (if nil, uses the default "HPBars.StatusIconSprite" sprite)
 HPBars.StatusEffects = {
-	["Freeze"] = {
-		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_FREEZE) end,
-		animation = "idle",
-		frame = 0,
-		sprite = nil
-	},
-	["Charm"] = {
-		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CHARM) end,
-		animation = "idle",
-		frame = 1,
-	},
 	["Burn"] = {
 		condition = function(entity)
 			return entity and entity:HasEntityFlags(EntityFlag.FLAG_BURN) or
 				isDummyBarVisible(entity)
 		end,
 		animation = "idle",
+		frame = 0,
+	},
+	["Charm"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CHARM) end,
+		animation = "idle",
+		frame = 1,
+	},
+	["Confusion"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CONFUSION) end,
+		animation = "idle",
 		frame = 2,
 	},
-	-- (crown effect) is not able to occur on bosses
 	["Fear"] = {
 		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_FEAR) end,
+		animation = "idle",
+		frame = 3,
+	},
+	["Petrification"] = {
+		condition = function(entity) return entity and (entity:HasEntityFlags(EntityFlag.FLAG_FREEZE) or entity:HasEntityFlags(EntityFlag.FLAG_MIDAS_FREEZE)) end,
 		animation = "idle",
 		frame = 4,
 	},
@@ -77,35 +92,51 @@ HPBars.StatusEffects = {
 		animation = "idle",
 		frame = 6,
 	},
-	["Confusion"] = {
-		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_CONFUSION) end,
+	["Friendly"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_FRIENDLY) end,
 		animation = "idle",
 		frame = 7,
 	},
-	["Magnetized"] = {
-		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_MAGNETIZED) end,
+	["Shrink"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_SHRINK) end,
 		animation = "idle",
 		frame = 8,
-	},
-	["Brimstone Marked"] = {
-		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BRIMSTONE_MARKED) end,
-		animation = "idle",
-		frame = 9,
 	},
 	["Bleed out"] = {
 		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BLEED_OUT) end,
 		animation = "idle",
-		frame = 10,
+		frame = 9,
 	},
 	["Baited"] = {
 		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BAITED) end,
 		animation = "idle",
-		frame = 11,
+		frame = 10,
+	},
+	["Chained"] = {
+	 	condition = function(entity) return entity and isAnimaSolaChained(entity) end,
+	 	animation = "idle",
+	 	frame = 11,
+	},
+	["Freeze"] = {
+		condition = function(entity) return entity and (entity:HasEntityFlags(EntityFlag.FLAG_ICE_FROZEN) or entity:HasEntityFlags(EntityFlag.FLAG_ICE)) end,
+		animation = "idle",
+		frame = 12,
+		sprite = nil
+	},
+	["Magnetized"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_MAGNETIZED) end,
+		animation = "idle",
+		frame = 13,
+	},
+	["Brimstone Marked"] = {
+		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_BRIMSTONE_MARKED) end,
+		animation = "idle",
+		frame = 14,
 	},
 	["Weakness"] = {
 		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_WEAKNESS) end,
 		animation = "idle",
-		frame = 12,
+		frame = 15,
 	},
 }
 -- table of condition macros used to alter the displayed boss icon
