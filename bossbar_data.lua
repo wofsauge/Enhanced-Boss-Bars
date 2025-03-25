@@ -37,12 +37,10 @@ local function isDummyBarVisible(entity)
 end
 
 local function isAnimaSolaChained(entity)
+	local entityHash = GetPtrHash(entity)
 	for _, chain in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.ANIMA_CHAIN)) do
 		if chain.Target then
-			if chain.Target.Position.X == entity.Position.X and chain.Target.Position.Y == entity.Position.Y then
-				print("true")
-				return true
-			end
+			return GetPtrHash(chain.Target) == entityHash
 		end
 	end
 	return false
