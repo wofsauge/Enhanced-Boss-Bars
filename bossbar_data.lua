@@ -119,7 +119,6 @@ HPBars.StatusEffects = {
 		condition = function(entity) return entity and (entity:HasEntityFlags(EntityFlag.FLAG_ICE_FROZEN) or entity:HasEntityFlags(EntityFlag.FLAG_ICE)) end,
 		animation = "idle",
 		frame = 12,
-		sprite = nil
 	},
 	["Magnetized"] = {
 		condition = function(entity) return entity and entity:HasEntityFlags(EntityFlag.FLAG_MAGNETIZED) end,
