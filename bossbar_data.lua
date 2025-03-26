@@ -37,13 +37,12 @@ local function isDummyBarVisible(entity)
 end
 
 local function isAnimaSolaChained(entity)
-	local entityHash = GetPtrHash(entity)
-	for _, chain in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.ANIMA_CHAIN)) do
-		if chain.Target then
-			return GetPtrHash(chain.Target) == entityHash
-		end
-	end
-	return false
+    for _, chain in ipairs(Isaac.FindByType(EntityType.ENTITY_EFFECT, EffectVariant.ANIMA_CHAIN)) do
+        if chain.Target and GetPtrHash(chain.Target) == GetPtrHash(entity) then
+            return true
+        end
+    end
+    return false
 end
 
 -- Stores which sprite should be rendered and what animation / frame to use. Usage: [Identifier] = {table}
