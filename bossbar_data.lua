@@ -732,7 +732,7 @@ HPBars.BossDefinitions = {
 		conditionalSprites = {
 			{"isI1Equal", path .. "chapter4/lokii_2.png", {2}}
 		},
-		sorting = function(entity1, entity2) return entity1:ToNPC().I1 == 2 end,
+		sorting = function(entity1, entity2) return entity2:ToNPC().I1 < entity1:ToNPC().I1 end,
 		offset = Vector(-3, 0)
 	},
 	["71.0"] = {sprite = path .. "chapter2/fistula_large.png", bossColors={ "_grey", }, offset = Vector(-7, 0)},
